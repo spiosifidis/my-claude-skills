@@ -14,12 +14,6 @@ npx skills add steliosio/my-claude-skills -s skill-name
 npx skills add steliosio/my-claude-skills -s '*'
 ```
 
-## MCP Servers
-
-| MCP | Description | Install |
-|---|---|---|
-| skills-hub | Serves installed skills as MCP prompts in any MCP-compatible tool | `claude mcp add skills-hub -- npx @skills-hub-ai/mcp` |
-
 ## Skills
 
 | Skill | Description |
