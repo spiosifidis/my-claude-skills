@@ -14,6 +14,12 @@ npx skills add steliosio/my-claude-skills -s skill-name
 npx skills add steliosio/my-claude-skills -s '*'
 ```
 
+## MCP Servers
+
+| MCP | Description | Install |
+|---|---|---|
+| skills-hub | Serves installed skills as MCP prompts in any MCP-compatible tool | `claude mcp add skills-hub -- npx @skills-hub-ai/mcp` |
+
 ## Skills
 
 | Skill | Description |
@@ -44,3 +50,6 @@ npx skills add steliosio/my-claude-skills -s '*'
 | manage-design-system | Manage design systems |
 | upload-to-stitch | Upload assets to Stitch |
 | wellally-tech | Integrate digital health data sources |
+| frontend-design | Distinctive, non-templated UI design guidance |
+| impeccable | Frontend UI anti-pattern auditor and polisher |
+| web-design-guidelines | Check UI against Vercel Web Interface Guidelines |
