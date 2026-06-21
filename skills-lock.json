@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "access-control-rbac": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/access-control-rbac/skills/access-control-rbac/SKILL.md",
+      "computedHash": "d46a02b1980fd8a2333d8532d51099ed2450e6d287973a87766ebf3c1674267e"
+    },
     "browser-use": {
       "source": "browser-use/browser-use",
       "sourceType": "github",
@@ -49,11 +55,41 @@
       "skillPath": "skills/caveman-stats/SKILL.md",
       "computedHash": "47ce2de3d6cb39a75047b5c962e4eb3da15594e7397c94103e9a104d42626553"
     },
+    "github-workflow": {
+      "source": "hairyf/skills",
+      "sourceType": "github",
+      "skillPath": "skills/github-workflow/SKILL.md",
+      "computedHash": "76a48fc7229ceaa93212e0fcaca65dcdcda4e93ec3e25baf1045d808972a327e"
+    },
     "impeccable": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
       "computedHash": "fcdb518f7ea22b4feb82e8082b553e067c963c05484e0f0ce2147c354efc31c8"
+    },
+    "motion": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/motion/skills/motion/SKILL.md",
+      "computedHash": "417c59918c5950c936bffddd060f79425f999f25b18ba94aa70b6742cba3b3d1"
+    },
+    "nextjs": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/nextjs/skills/nextjs/SKILL.md",
+      "computedHash": "00bca76704da4d45fb490f761f07cff0c541b5e8e75e5dd8379d3f803da6d02e"
+    },
+    "react-hook-form-zod": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/react-hook-form-zod/skills/react-hook-form-zod/SKILL.md",
+      "computedHash": "46ee3a7d14017a14c978f7e3cf0aab6b79ac02036f72d86dac1e9cffdb72ca6b"
+    },
+    "sequential-thinking": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/sequential-thinking/skills/sequential-thinking/SKILL.md",
+      "computedHash": "9420fa44a3df9476884a8c493d3d7234da54e951d5229bd5f0d64eec04c12570"
     },
     "shannon": {
       "source": "unicodeveloper/shannon",
@@ -61,11 +97,47 @@
       "skillPath": "SKILL.md",
       "computedHash": "5dbcc124e13135a2d8feabdb0149c130f46440a0685c24ab17bf01fb6ab60770"
     },
+    "supabase": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase/SKILL.md",
+      "computedHash": "d414d598b9428b3e851c4ce61898649906b19e55aa7415bb42a286bd9ca2ab32"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "0d2c4857a7d6fdcd3fbc46e458fa4c497f029cab89a01548b3defce203003932"
+    },
+    "systematic-debugging": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/systematic-debugging/skills/systematic-debugging/SKILL.md",
+      "computedHash": "d89d313df49c3a225311a52897f086eb5605740771c328684b73adc7ce705ed2"
+    },
+    "tailwind-v4-shadcn": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/tailwind-v4-shadcn/skills/tailwind-v4-shadcn/SKILL.md",
+      "computedHash": "c2b354b64cbd922c8d93121091d079026e2c8a3ca81c07c4f31b6e738c2695f1"
+    },
+    "verification-before-completion": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/verification-before-completion/skills/verification-before-completion/SKILL.md",
+      "computedHash": "958566c514631f014426f791b1fd16e9d63429b43ffe1c7c13a763c71f6ec6e5"
+    },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
       "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "zod": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/zod/skills/zod/SKILL.md",
+      "computedHash": "ebb08035d97225a107a9559e449b81600b876e3a03aaf644cc2bcfddbdb1c222"
     }
   }
 }
