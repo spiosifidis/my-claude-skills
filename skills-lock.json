@@ -55,6 +55,12 @@
       "skillPath": "skills/caveman-stats/SKILL.md",
       "computedHash": "47ce2de3d6cb39a75047b5c962e4eb3da15594e7397c94103e9a104d42626553"
     },
+    "frontend-design": {
+      "source": "anthropics/claude-code",
+      "sourceType": "github",
+      "skillPath": "plugins/frontend-design/skills/frontend-design/SKILL.md",
+      "computedHash": "3e0be122a3db8206b6d0d6b07cca898b5c75fb9b7b2101abe143fb2851734d2e"
+    },
     "github-workflow": {
       "source": "hairyf/skills",
       "sourceType": "github",
@@ -65,7 +71,7 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "fcdb518f7ea22b4feb82e8082b553e067c963c05484e0f0ce2147c354efc31c8"
+      "computedHash": "d28c91b173fd8563f34dd5d9590d194e820a96ca6ae401453e39c72e9f908463"
     },
     "motion": {
       "source": "secondsky/claude-skills",
@@ -85,6 +91,12 @@
       "skillPath": "plugins/react-hook-form-zod/skills/react-hook-form-zod/SKILL.md",
       "computedHash": "46ee3a7d14017a14c978f7e3cf0aab6b79ac02036f72d86dac1e9cffdb72ca6b"
     },
+    "savethetokens": {
+      "source": "Redclawww/savethetokens",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "99c6ab676029d47f7476ef34e4c83a5ca53ddb7f1e1a00ff1edcec6a8bc47b16"
+    },
     "sequential-thinking": {
       "source": "secondsky/claude-skills",
       "sourceType": "github",
@@ -95,7 +107,7 @@
       "source": "unicodeveloper/shannon",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "5dbcc124e13135a2d8feabdb0149c130f46440a0685c24ab17bf01fb6ab60770"
+      "computedHash": "09767c84977915af53c85c0ee834cdf6e3683b75830c15298e5b904b3d897f96"
     },
     "supabase": {
       "source": "supabase/agent-skills",
@@ -131,7 +143,7 @@
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+      "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
     },
     "zod": {
       "source": "secondsky/claude-skills",
