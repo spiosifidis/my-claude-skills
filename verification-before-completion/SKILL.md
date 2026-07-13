@@ -170,6 +170,12 @@ From failure memories:
 - Implications of success
 - ANY communication suggesting completion/correctness
 
+## Skill Currency Check
+
+Before declaring any task complete, also ask: did this session reveal that an existing skill is wrong, outdated, or beatable by a better technique? If yes, invoke `keeping-skills-current` and fix the skill file before finishing — don't defer it to a mental note.
+
+This rides the same gate as verification: the task isn't done until both the work AND any skill gap it surfaced are handled.
+
 ## The Bottom Line
 
 **No shortcuts for verification.**
