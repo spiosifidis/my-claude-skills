@@ -7,12 +7,6 @@
       "skillPath": "plugins/access-control-rbac/skills/access-control-rbac/SKILL.md",
       "computedHash": "d46a02b1980fd8a2333d8532d51099ed2450e6d287973a87766ebf3c1674267e"
     },
-    "browser-use": {
-      "source": "browser-use/browser-use",
-      "sourceType": "github",
-      "skillPath": "skills/browser-use/SKILL.md",
-      "computedHash": "f1acd28a90cc802b844a7d742a672b3c7f13b765aedaf1b8b5cb70948c25e495"
-    },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
@@ -71,13 +65,13 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "7463775a7569482158c83807f614da305bc45f006e1504993a21f5cfe434f86d"
+      "computedHash": "9dcaecb6106e8bec775ae7651e8e989693b0467d21509794cfb94a08d30af4b7"
     },
     "motion": {
-      "source": "secondsky/claude-skills",
+      "source": "hairyf/skills",
       "sourceType": "github",
-      "skillPath": "plugins/motion/skills/motion/SKILL.md",
-      "computedHash": "417c59918c5950c936bffddd060f79425f999f25b18ba94aa70b6742cba3b3d1"
+      "skillPath": "skills/motion/SKILL.md",
+      "computedHash": "f9570a39ae54cba08f40345f68007a66130904224ab45656582c1719dfcad0b9"
     },
     "nextjs": {
       "source": "secondsky/claude-skills",
@@ -95,7 +89,7 @@
       "source": "Redclawww/savethetokens",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "99c6ab676029d47f7476ef34e4c83a5ca53ddb7f1e1a00ff1edcec6a8bc47b16"
+      "computedHash": "763ab91f827540d03850dafd76a7ca1dd926cc9305d2fad78220b4ba5695ec4c"
     },
     "sequential-thinking": {
       "source": "secondsky/claude-skills",
@@ -113,13 +107,13 @@
       "source": "supabase/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/supabase/SKILL.md",
-      "computedHash": "d414d598b9428b3e851c4ce61898649906b19e55aa7415bb42a286bd9ca2ab32"
+      "computedHash": "17a437f3de2371ec43ad8a17d3e858337695efb46ed4af5dd6426f330bb6d032"
     },
     "supabase-postgres-best-practices": {
       "source": "supabase/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
-      "computedHash": "0d2c4857a7d6fdcd3fbc46e458fa4c497f029cab89a01548b3defce203003932"
+      "computedHash": "ec56a54fba0e97bee52c7f244ba603bb284bf8d1b739c66a5cc84ec3df709d9d"
     },
     "systematic-debugging": {
       "source": "secondsky/claude-skills",
