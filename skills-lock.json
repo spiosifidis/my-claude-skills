@@ -101,7 +101,7 @@
       "source": "unicodeveloper/shannon",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "09767c84977915af53c85c0ee834cdf6e3683b75830c15298e5b904b3d897f96"
+      "computedHash": "5dbcc124e13135a2d8feabdb0149c130f46440a0685c24ab17bf01fb6ab60770"
     },
     "supabase": {
       "source": "supabase/agent-skills",
@@ -119,7 +119,7 @@
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/systematic-debugging/skills/systematic-debugging/SKILL.md",
-      "computedHash": "d89d313df49c3a225311a52897f086eb5605740771c328684b73adc7ce705ed2"
+      "computedHash": "76537363ccdf379a5adf78b39bc7760103ebcc367d23682884efd3e62752eda3"
     },
     "tailwind-v4-shadcn": {
       "source": "secondsky/claude-skills",
@@ -143,7 +143,7 @@
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/zod/skills/zod/SKILL.md",
-      "computedHash": "ebb08035d97225a107a9559e449b81600b876e3a03aaf644cc2bcfddbdb1c222"
+      "computedHash": "ee85e9c1de4a21eb73826be790e73685715ade9b8105df925d8366c302b2d70f"
     }
   }
 }
