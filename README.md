@@ -2,13 +2,25 @@
 
 Personal collection of Claude Code skills — backed up from all machines.
 
+## Set up a machine (recommended)
+
+Run the bootstrap on any new or existing machine — it installs all skills
+globally (`~/.claude/skills`, available in every project), updates ones already
+installed, and adds a one-line reminder to `~/.claude/CLAUDE.md` so sessions
+check for applicable skills before responding. Idempotent — re-run any time to
+pull in new or updated skills:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/spiosifidis/my-claude-skills/main/bootstrap.sh | bash
+```
+
 ## Install one skill
 
 ```bash
 npx skills add spiosifidis/my-claude-skills -s skill-name
 ```
 
-## Install all skills
+## Install all skills (project scope)
 
 ```bash
 npx skills add spiosifidis/my-claude-skills -s '*'
