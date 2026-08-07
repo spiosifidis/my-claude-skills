@@ -7,8 +7,10 @@ Personal collection of Claude Code skills — backed up from all machines.
 Run the bootstrap on any new or existing machine — it installs all skills
 globally (`~/.claude/skills`, available in every project), updates ones already
 installed, adds a one-line reminder to `~/.claude/CLAUDE.md` so sessions check
-for applicable skills before responding, and schedules a weekly auto-update
-cron (Mondays 09:00) so the machine stays in sync with this repo on its own.
+for applicable skills before responding, and sets up weekly auto-updates with
+catch-up: a Monday 09:00 cron for machines that are on, plus a shell-startup
+hook so a machine that was off catches up the next time a terminal opens (a
+7-day timestamp guard keeps it to at most one real update per week).
 Idempotent — re-run any time:
 
 ```bash
