@@ -99,13 +99,13 @@ usable_budget = total_budget * 0.70  # 70% for context
 
 ## Context Window Reference
 
-| Model           | Context Window | Safe Budget |
-| --------------- | -------------- | ----------- |
-| claude-3-opus   | 200K           | 140K        |
-| claude-3-sonnet | 200K           | 140K        |
-| claude-3-haiku  | 200K           | 140K        |
-| gpt-4o          | 128K           | 90K         |
-| gpt-4o-mini     | 128K           | 90K         |
+| Model                     | Context Window | Safe Budget (70%) |
+| ------------------------- | -------------- | ----------------- |
+| claude-opus-5             | 1M             | 700K              |
+| claude-sonnet-5           | 1M             | 700K              |
+| claude-haiku-4-5-20251001 | 200K           | 140K              |
+
+For other providers' models, apply the same 70% rule to their published context windows.
 
 ## Caching
 

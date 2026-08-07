@@ -4,13 +4,13 @@ The Context Governor recommends optimal models based on task requirements, conte
 
 ## Model Capability Matrix
 
-| Model           | Context Window | Tier     | Best For                         |
-| --------------- | -------------- | -------- | -------------------------------- |
-| claude-3-opus   | 200K           | premium  | Complex reasoning, nuanced tasks |
-| claude-3-sonnet | 200K           | standard | Balanced performance/cost        |
-| claude-3-haiku  | 200K           | economy  | Fast, simple tasks               |
-| gpt-4o          | 128K           | premium  | Multi-modal, complex tasks       |
-| gpt-4o-mini     | 128K           | economy  | Simple tasks, high volume        |
+| Model                       | Context Window | Tier     | Best For                         |
+| --------------------------- | -------------- | -------- | -------------------------------- |
+| claude-opus-5               | 1M             | premium  | Complex reasoning, nuanced tasks |
+| claude-sonnet-5             | 1M             | standard | Balanced performance/cost        |
+| claude-haiku-4-5-20251001   | 200K           | economy  | Fast, simple tasks               |
+
+Other providers' flagship and mini tiers can be slotted into the same premium/economy tiers if your stack is multi-provider.
 
 ## Selection Algorithm
 
@@ -43,8 +43,8 @@ If `prefer_cost_savings` is enabled:
 
 ```json
 {
-  "recommended_model": "claude-3-sonnet",
-  "original_model": "claude-3-opus",
+  "recommended_model": "claude-sonnet-5",
+  "original_model": "claude-opus-5",
   "reason": "Task requirements met by sonnet, 80% cost savings",
   "capability_match": true,
   "cost_savings_estimate": 0.8
@@ -56,25 +56,25 @@ If `prefer_cost_savings` is enabled:
 ### Code Generation
 
 - **Required**: Strong coding ability
-- **Recommended**: claude-3-sonnet, gpt-4o
-- **Acceptable**: claude-3-haiku (simple tasks)
+- **Recommended**: claude-sonnet-5
+- **Acceptable**: claude-haiku-4-5-20251001 (simple tasks)
 
 ### Debugging
 
 - **Required**: Code understanding, reasoning
-- **Recommended**: claude-3-sonnet
-- **Upgrade to**: claude-3-opus (complex bugs)
+- **Recommended**: claude-sonnet-5
+- **Upgrade to**: claude-opus-5 (complex bugs)
 
 ### Explanation
 
 - **Required**: Clear communication
-- **Recommended**: claude-3-haiku, claude-3-sonnet
+- **Recommended**: claude-haiku-4-5-20251001 (Haiku 4.5), claude-sonnet-5
 - **Notes**: Lower tier often sufficient
 
 ### Complex Reasoning
 
 - **Required**: Advanced reasoning
-- **Recommended**: claude-3-opus
+- **Recommended**: claude-opus-5
 - **Notes**: Don't downgrade for cost
 
 ## Configuration
@@ -87,21 +87,21 @@ Override model selection behavior:
     "enabled": true,
     "prefer_cost_savings": true,
     "capability_threshold": 0.8,
-    "allowed_models": ["claude-3-opus", "claude-3-sonnet", "claude-3-haiku"],
-    "default_model": "claude-3-sonnet"
+    "allowed_models": ["claude-opus-5", "claude-sonnet-5", "claude-haiku-4-5-20251001"],
+    "default_model": "claude-sonnet-5"
   }
 }
 ```
 
 ## Cost Estimation
 
-Approximate costs per 1K tokens (input):
+Approximate relative cost per input token (check current provider pricing before relying on exact figures):
 
-| Model           | Cost/1K  |
-| --------------- | -------- |
-| claude-3-opus   | $0.015   |
-| claude-3-sonnet | $0.003   |
-| claude-3-haiku  | $0.00025 |
+| Model                     | Relative Cost                        |
+| ------------------------- | ------------------------------------ |
+| claude-opus-5             | Premium tier (baseline)              |
+| claude-sonnet-5           | ~40-60% of premium tier              |
+| claude-haiku-4-5-20251001 | ~5x cheaper than the premium tier    |
 
 Cost savings calculation:
 
@@ -117,11 +117,11 @@ The execution plan includes model recommendations:
 {
   "recommendations": {
     "model": {
-      "recommended": "claude-3-sonnet",
-      "original": "claude-3-opus",
+      "recommended": "claude-sonnet-5",
+      "original": "claude-opus-5",
       "reason": "Task complexity allows standard tier",
       "cost_savings_estimate": 0.8,
-      "alternatives": ["claude-3-opus"],
+      "alternatives": ["claude-opus-5"],
       "warnings": []
     }
   }
@@ -133,7 +133,7 @@ The execution plan includes model recommendations:
 Force a specific model:
 
 ```bash
-python scripts/plan.py --budget 8000 --model claude-3-opus
+python scripts/plan.py --budget 8000 --model claude-opus-5
 ```
 
 This skips automatic selection but still validates context fits.

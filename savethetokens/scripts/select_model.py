@@ -14,7 +14,7 @@ class ModelSelector:
     
     # Model catalog with capabilities
     MODELS = {
-        # Claude 4 family (Anthropic latest)
+        # Claude 4 family (legacy)
         "claude-sonnet-4": {
             "context_window": 200000,
             "max_output": 64000,
@@ -47,45 +47,28 @@ class ModelSelector:
             },
             "tier": "premium"
         },
-        # Claude 3.5 family
-        "claude-3-5-sonnet": {
-            "context_window": 200000,
-            "max_output": 8192,
+        # Claude 5 family (Anthropic current)
+        "claude-sonnet-5": {
+            "context_window": 1000000,
+            "max_output": 128000,
             "cost_per_1k_input": 0.003,
             "cost_per_1k_output": 0.015,
             "capabilities": {
                 "code_generation": 0.95,
                 "debugging": 0.95,
-                "explanation": 0.90,
-                "search": 0.75,
-                "planning": 0.90,
-                "review": 0.90,
-                "generic": 0.85
+                "explanation": 0.95,
+                "search": 0.80,
+                "planning": 0.95,
+                "review": 0.95,
+                "generic": 0.90
             },
             "tier": "standard"
         },
-        # Claude 3 family
-        "claude-3-sonnet": {
+        "claude-haiku-4-5-20251001": {
             "context_window": 200000,
-            "max_output": 4096,
-            "cost_per_1k_input": 0.003,
-            "cost_per_1k_output": 0.015,
-            "capabilities": {
-                "code_generation": 0.85,
-                "debugging": 0.85,
-                "explanation": 0.85,
-                "search": 0.70,
-                "planning": 0.80,
-                "review": 0.80,
-                "generic": 0.80
-            },
-            "tier": "standard"
-        },
-        "claude-3-haiku": {
-            "context_window": 200000,
-            "max_output": 4096,
-            "cost_per_1k_input": 0.00025,
-            "cost_per_1k_output": 0.00125,
+            "max_output": 64000,
+            "cost_per_1k_input": 0.001,
+            "cost_per_1k_output": 0.005,
             "capabilities": {
                 "code_generation": 0.70,
                 "debugging": 0.65,
@@ -97,19 +80,19 @@ class ModelSelector:
             },
             "tier": "economy"
         },
-        "claude-3-opus": {
-            "context_window": 200000,
-            "max_output": 4096,
-            "cost_per_1k_input": 0.015,
-            "cost_per_1k_output": 0.075,
+        "claude-opus-5": {
+            "context_window": 1000000,
+            "max_output": 128000,
+            "cost_per_1k_input": 0.005,
+            "cost_per_1k_output": 0.025,
             "capabilities": {
-                "code_generation": 0.95,
-                "debugging": 0.95,
-                "explanation": 0.95,
-                "search": 0.80,
-                "planning": 0.95,
-                "review": 0.95,
-                "generic": 0.90
+                "code_generation": 1.0,
+                "debugging": 1.0,
+                "explanation": 1.0,
+                "search": 0.85,
+                "planning": 1.0,
+                "review": 1.0,
+                "generic": 0.95
             },
             "tier": "premium"
         }
@@ -147,7 +130,7 @@ class ModelSelector:
         """
         # Normalize model name
         requested = self._normalize_model(requested_model)
-        requested_info = self.MODELS.get(requested, self.MODELS["claude-3-sonnet"])
+        requested_info = self.MODELS.get(requested, self.MODELS["claude-sonnet-5"])
         
         # Check if requested model fits
         if context_tokens > requested_info["context_window"] * 0.8:
@@ -209,15 +192,11 @@ class ModelSelector:
         model_lower = model.lower().replace("-", " ").replace("_", " ")
         
         mappings = {
-            "sonnet": "claude-3-sonnet",
-            "haiku": "claude-3-haiku",
-            "opus": "claude-3-opus",
-            "claude 3 sonnet": "claude-3-sonnet",
-            "claude 3 haiku": "claude-3-haiku",
-            "claude 3 opus": "claude-3-opus",
-            "claude 3.5 sonnet": "claude-3-5-sonnet",
             "claude sonnet 4": "claude-sonnet-4",
             "claude opus 4": "claude-opus-4",
+            "sonnet": "claude-sonnet-5",
+            "haiku": "claude-haiku-4-5-20251001",
+            "opus": "claude-opus-5",
         }
         
         for key, value in mappings.items():
@@ -229,7 +208,7 @@ class ModelSelector:
         if normalized in self.MODELS:
             return normalized
         
-        return "claude-3-sonnet"  # Default
+        return "claude-sonnet-5"  # Default
     
     def _find_larger_context_models(self, min_context: int) -> list[str]:
         """Find models with sufficient context window."""
@@ -313,7 +292,7 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Select optimal model")
-    parser.add_argument("--model", "-m", default="claude-3-sonnet", help="Requested model")
+    parser.add_argument("--model", "-m", default="claude-sonnet-5", help="Requested model")
     parser.add_argument("--intent", "-i", default="generic", help="Task intent")
     parser.add_argument("--tokens", "-t", type=int, default=4000, help="Context tokens")
     parser.add_argument("--no-cost-optimize", action="store_true", help="Disable cost optimization")

@@ -25,8 +25,6 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | caveman-commit | Writing git commit messages |
 | caveman-review | Code review / PR feedback |
 | caveman-compress | Compress CLAUDE.md or memory files to save input tokens |
-| caveman-stats | Check actual token usage for current session |
-| cavecrew | Delegate work to parallel subagents efficiently |
 | caveman-help | Reference card for all caveman commands |
 | savethetokens | Large codebases, long debug sessions, multi-file features |
 | sequential-thinking | Complex schema changes, elusive bugs, large refactors |
@@ -44,7 +42,6 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | web-design-guidelines | Check code against Vercel web standards |
 | shadcn-ui | Building components with Radix/Shadcn primitives |
 | tailwind-v4-shadcn | Tailwind v4 + Shadcn setup, dark mode, CSS variables |
-| web-asset-generator | Generate favicons, icons, Open Graph images |
 | motion | Framer Motion animations — scroll, drag, page transitions |
 
 ### React & Next.js
@@ -71,26 +68,19 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 ### Document Handling
 | Skill | When to use |
 |---|---|
-| pdf | Read, extract, create PDF files |
-| docx | Create/edit Word documents |
-| xlsx | Create/edit spreadsheets |
-| pptx | Create/edit PowerPoint files |
 
 ### Writing & Content
 | Skill | When to use |
 |---|---|
 | avoid-ai-writing | Remove AI-isms from written content |
-| internal-comms | Write internal memos, announcements |
 | invoice-organizer | Organize invoices/receipts for tax prep |
 
 ### Health / Athlisis
 | Skill | When to use |
 |---|---|
 | goal-analyzer | Analyze health goals and progress data |
-| wellally-tech | Integrate Apple Health, Fitbit, Oura Ring data |
 
 ### Skill Management
 | Skill | When to use |
 |---|---|
-| find-skills | Search marketplace for new skills |
 | skill-creator | Build new custom skills |

@@ -79,13 +79,13 @@ Zod is a TypeScript-first validation library that enables developers to define s
 ## Installation
 
 ```bash
-bun add zod
+npm install zod
 # or
-bun add zod
-# or
-bun add zod
+pnpm add zod
 # or
 yarn add zod
+# or
+bun add zod
 ```
 
 **Requirements**:
