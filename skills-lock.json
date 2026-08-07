@@ -132,6 +132,222 @@
       "sourceType": "github",
       "skillPath": "plugins/zod/skills/zod/SKILL.md",
       "computedHash": "ee85e9c1de4a21eb73826be790e73685715ade9b8105df925d8366c302b2d70f"
+    },
+    "athlisis-diet-plans": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "athlisis-diet-plans/SKILL.md",
+      "computedHash": "92eb15e2c4d34c3f0574f0a14415e3936df3a96a3d532a35fcb6b0c97efe084c"
+    },
+    "avoid-ai-writing": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "avoid-ai-writing/SKILL.md",
+      "computedHash": "6b4c16e00bce4b44ea14573ccbae2a6e3fc73fe9d584904ae0b5265bd60ee7fe"
+    },
+    "brainstorming": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "brainstorming/SKILL.md",
+      "computedHash": "26a8eb33d548f0c4ead9e7bc13a90c3853398d30345c651245a61a12b869f130"
+    },
+    "canvas-design": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "canvas-design/SKILL.md",
+      "computedHash": "a2fe47d24b3fd8e52faef731fff099c557e698083cd644b2e5695cc4dd8c7715"
+    },
+    "changelog-generator": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "changelog-generator/SKILL.md",
+      "computedHash": "0facdb5c491a654e3b0f6d300fb8fa14472d811cb715c632dc2862919b277dae"
+    },
+    "dispatching-parallel-agents": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "dispatching-parallel-agents/SKILL.md",
+      "computedHash": "85df55d2235a7623b315dac4bc340c14a37dcdc57c869c80a829e1a53a174689"
+    },
+    "email-best-practices": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "email-best-practices/SKILL.md",
+      "computedHash": "c7218333381fa335b8a912bd55b3bb58b5b567a174f9e1d8b41940ff82f1a6b6"
+    },
+    "executing-plans": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "executing-plans/SKILL.md",
+      "computedHash": "34c46d53c789a10b2121824cfcf41e8fbbb79a9c676ba5f35dc78ed3788dc2f2"
+    },
+    "file-organizer": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "file-organizer/SKILL.md",
+      "computedHash": "1b03d0f0879230671fba161b92d732c9ae7e947bfe061cbf008d39fa9df1ed8b"
+    },
+    "finishing-a-development-branch": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "finishing-a-development-branch/SKILL.md",
+      "computedHash": "aa2632ed96df59c36348bd8f8ec1ff0fb0c5cc68b60691834687bf4cedc6be3f"
+    },
+    "goal-analyzer": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "goal-analyzer/SKILL.md",
+      "computedHash": "d4b259614d04a48eb9f12f6e1857ea28e117fae163213d9f58a7fa109dddf20c"
+    },
+    "image-enhancer": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "image-enhancer/SKILL.md",
+      "computedHash": "2fbd9f8dadf7de2e93844d0626a46f1096925ee78f41174f4c261604b39828ca"
+    },
+    "invoice-organizer": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "invoice-organizer/SKILL.md",
+      "computedHash": "3981cc7b74330cb508ffd53e03664e94eb3413b9fbf9fd14a123774de15a8499"
+    },
+    "keeping-skills-current": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "keeping-skills-current/SKILL.md",
+      "computedHash": "d79e8e75e688077e217306faced508640d3aa03aa1a4b026a527e7301350b5f2"
+    },
+    "mcp-builder": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "mcp-builder/SKILL.md",
+      "computedHash": "1f14aefdb659e583623226395e82d5fd2ba38bab205692c08fa4c57369c712e9"
+    },
+    "next-dev-loop": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "next-dev-loop/SKILL.md",
+      "computedHash": "aad97b32ba6efd31e92d063ec77120a694fe0d4a9401daf9af4c205cd5e21b07"
+    },
+    "react-email": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "react-email/SKILL.md",
+      "computedHash": "ff40e3355c318e5ef203eb1118cab574454ce65dae01bb268b05a2e244b8041b"
+    },
+    "receiving-code-review": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "receiving-code-review/SKILL.md",
+      "computedHash": "3f56080356c62e4f74a183d7371686babc661e41a952dc67a97c2c76fe8a9329"
+    },
+    "requesting-code-review": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "requesting-code-review/SKILL.md",
+      "computedHash": "cde520e9118d7e6b74b5ab0123cff2f68d9c07bddb3f82c997753b6126600aed"
+    },
+    "resend": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "resend/SKILL.md",
+      "computedHash": "b246db7265df47250a7a55efb02778c2870d18e8030164a23e26a6324e4f4f8b"
+    },
+    "subagent-driven-development": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "subagent-driven-development/SKILL.md",
+      "computedHash": "aaeb6686111c76b3c38e09156fe18af44d73b324ee055e5cb0ab63dc776f216f"
+    },
+    "test-driven-development": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "test-driven-development/SKILL.md",
+      "computedHash": "eee144aea35d783296d178017e9fe843c6d16cc8b240e106f5e50910f6caf329"
+    },
+    "theme-factory": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "theme-factory/SKILL.md",
+      "computedHash": "93e78aa44f8fa00bb2c0608f400de1e1dcd6494611dd8ea27c867654240c7bcd"
+    },
+    "using-git-worktrees": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "using-git-worktrees/SKILL.md",
+      "computedHash": "212ad917e5543e84ea3adf4e3fab537675db976fdab05d4de432870e38b49e80"
+    },
+    "using-superpowers": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "using-superpowers/SKILL.md",
+      "computedHash": "75fb918d6ddbdfea9abe9d67a8d9214b1c95d9da58078c078b04fc658526c1cf"
+    },
+    "web-quality-accessibility": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "web-quality-accessibility/SKILL.md",
+      "computedHash": "8db831522c5cc792bfed16f3a34030428cfc600fc5fc68267cd36611d39fc05e"
+    },
+    "web-quality-audit": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "web-quality-audit/SKILL.md",
+      "computedHash": "01ac2814344a195796d828538cf5e2c0fa6b3681355fcea4fb08ac2a71946c53"
+    },
+    "web-quality-core-web-vitals": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "web-quality-core-web-vitals/SKILL.md",
+      "computedHash": "cff164a026ff1074f9d023c08c8428c33df606f300211950c81e0cb120956c63"
+    },
+    "web-quality-performance": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "web-quality-performance/SKILL.md",
+      "computedHash": "005de5df39b5cce2c6204334d4b2ae1881a607b988ae91a1dbedaf5c3a794cb7"
+    },
+    "web-quality-seo": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "web-quality-seo/SKILL.md",
+      "computedHash": "23ad043dd75730f15a707f1e4df7aea38823889431147829a35d2af652212966"
+    },
+    "wordpress-router": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "wordpress-router/SKILL.md",
+      "computedHash": "d85acceaae3247f9c80385f77c885dc6ecd8f397f0b02bd704841698706a693c"
+    },
+    "wp-block-themes": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "wp-block-themes/SKILL.md",
+      "computedHash": "b9ff8eac4f0dc727ef9e34e28f08d6dcc2285df954697fd1eadedfc53848790d"
+    },
+    "wp-performance": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "wp-performance/SKILL.md",
+      "computedHash": "b91c0da64b6d791792c8206be1b84ac94125d82f6b5d318a6327177dff92598b"
+    },
+    "wp-wpcli-and-ops": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "wp-wpcli-and-ops/SKILL.md",
+      "computedHash": "f6d94a47c2d2c358bf910cd32f32194a736609f8ef03b460cc84f1459d476f2a"
+    },
+    "writing-plans": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "writing-plans/SKILL.md",
+      "computedHash": "b73b59d43c34c3fc225bfae419c458bb216af80df25fc0c545dfa7fd2a161722"
+    },
+    "writing-skills": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "writing-skills/SKILL.md",
+      "computedHash": "792e9d25ed6fbe38561202af07e6dd570060f745f9b8f4c71d6d13e7bc9597fa"
     }
   }
 }
