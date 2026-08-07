@@ -3,8 +3,8 @@
 Cost Calculator - Calculate token costs and savings from context optimization.
 
 Based on real pricing:
-- Input tokens: ~$0.003/1K (Claude 3 Sonnet)
-- Output tokens: ~$0.015/1K (Claude 3 Sonnet)
+- Input tokens: ~$0.003/1K (Claude Sonnet 5)
+- Output tokens: ~$0.015/1K (Claude Sonnet 5)
 
 Tracks:
 - Per-session costs
@@ -27,31 +27,27 @@ class ModelPricing:
     output_cost: float  # $ per 1K output tokens
 
 
-# Model pricing (as of 2024)
+# Model pricing (as of 2026)
 MODEL_PRICING = {
-    "claude-3-opus": ModelPricing("Claude 3 Opus", 0.015, 0.075),
-    "claude-3-sonnet": ModelPricing("Claude 3 Sonnet", 0.003, 0.015),
-    "claude-3-haiku": ModelPricing("Claude 3 Haiku", 0.00025, 0.00125),
-    "claude-3-5-sonnet": ModelPricing("Claude 3.5 Sonnet", 0.003, 0.015),
+    "claude-opus-5": ModelPricing("Claude Opus 5", 0.005, 0.025),
+    "claude-sonnet-5": ModelPricing("Claude Sonnet 5", 0.003, 0.015),
+    "claude-haiku-4-5-20251001": ModelPricing("Claude Haiku 4.5", 0.001, 0.005),
     "claude-sonnet-4": ModelPricing("Claude Sonnet 4", 0.003, 0.015),
     "claude-opus-4": ModelPricing("Claude Opus 4", 0.015, 0.075),
-    "gpt-4-turbo": ModelPricing("GPT-4 Turbo", 0.01, 0.03),
-    "gpt-4o": ModelPricing("GPT-4o", 0.005, 0.015),
-    "gpt-3.5-turbo": ModelPricing("GPT-3.5 Turbo", 0.0005, 0.0015),
 }
 
 
 class CostCalculator:
     """Calculate costs and savings from context optimization."""
     
-    def __init__(self, model: str = "claude-3-sonnet"):
+    def __init__(self, model: str = "claude-sonnet-5"):
         """
         Initialize calculator.
         
         Args:
             model: Model name for pricing
         """
-        self.pricing = MODEL_PRICING.get(model, MODEL_PRICING["claude-3-sonnet"])
+        self.pricing = MODEL_PRICING.get(model, MODEL_PRICING["claude-sonnet-5"])
     
     def calculate_session_cost(
         self,
@@ -323,7 +319,7 @@ def main():
     parser.add_argument("--relevant", "-r", type=int, help="Relevant tokens (for waste analysis)")
     parser.add_argument("--sessions", "-s", type=int, default=20, help="Sessions per day per dev")
     parser.add_argument("--team", "-t", type=int, default=5, help="Team size")
-    parser.add_argument("--model", "-m", default="claude-3-sonnet", help="Model for pricing")
+    parser.add_argument("--model", "-m", default="claude-sonnet-5", help="Model for pricing")
     parser.add_argument("--json", "-j", action="store_true", help="Output as JSON")
     
     args = parser.parse_args()

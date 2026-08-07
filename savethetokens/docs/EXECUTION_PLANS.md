@@ -24,7 +24,7 @@ An execution plan is a JSON document with the following structure:
 
   "constraints": {
     "token_budget": 8000,
-    "target_model": "claude-3-sonnet",
+    "target_model": "claude-sonnet-5",
     "intent": "code_generation"
   },
 
@@ -37,9 +37,9 @@ An execution plan is a JSON document with the following structure:
 
   "recommendations": {
     "model": {
-      "recommended": "claude-3-sonnet",
+      "recommended": "claude-sonnet-5",
       "reason": "Sufficient for code generation, cost-optimized",
-      "alternatives": ["claude-3-opus"]
+      "alternatives": ["claude-opus-5"]
     },
     "budget_allocation": {
       "system_prompt": 500,

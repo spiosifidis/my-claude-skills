@@ -1,10 +1,10 @@
 # Router decision tree (v1)
 
-This is a lightweight routing guide. It assumes you can run `wp-project-triage` first.
+This is a lightweight routing guide. It assumes you have already identified the project type manually (per the router procedure: inspect for `wp-content/`, a theme `style.css` header, `theme.json`, a plugin header comment, or `composer.json`/`wp-env.json`).
 
-## Step 1: classify repo kind (from triage)
+## Step 1: classify repo kind (from your triage)
 
-Use `triage.project.kind` and the strongest signals:
+Assign the kind with the strongest signals from your inspection:
 
 - `wp-core` → treat as WordPress core checkout work (core patches, PHPUnit, build tools).
 - `wp-site` → treat as a full site repo (wp-content present; changes might be theme + plugins).

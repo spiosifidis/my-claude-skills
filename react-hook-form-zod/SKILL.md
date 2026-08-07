@@ -678,7 +678,7 @@ z.string().refine(
 ## Dependencies
 
 **Required**:
-- `react-hook-form@7.65.0` - Form state management
+- `react-hook-form@7.66.1` - Form state management
 - `zod@4.1.12` - Schema validation
 - `@hookform/resolvers@5.2.2` - Validation adapter
 

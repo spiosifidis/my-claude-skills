@@ -46,7 +46,7 @@ def create_execution_plan(
     context_units: list[dict],
     budget: int,
     intent: str | None = None,
-    target_model: str = "claude-3-sonnet",
+    target_model: str = "claude-sonnet-5",
     query: str | None = None,
     prefer_cost_savings: bool = True,
     auto_filter_packages: bool = True,
@@ -576,8 +576,8 @@ def main():
     )
     parser.add_argument(
         "--model", "-m",
-        default="claude-3-sonnet",
-        help="Target model (default: claude-3-sonnet)"
+        default="claude-sonnet-5",
+        help="Target model (default: claude-sonnet-5)"
     )
     parser.add_argument(
         "--output", "-o",

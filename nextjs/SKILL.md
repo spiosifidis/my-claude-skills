@@ -487,7 +487,7 @@ export async function getPosts() {
 | Type | Files |
 |------|-------|
 | **References** | `error-catalog.md`, `top-errors.md`, `next-16-migration-guide.md`, `server-actions-patterns.md`, `caching-apis.md` |
-| **Templates** | `async-params-page.tsx`, `server-action-form.tsx`, `route-handler-api.ts`, `cache-component-use-cache.tsx`, `parallel-routes-with-default.tsx`, `proxy-migration.ts` |
+| **Templates** | `async-params-page.tsx`, `app-router-async-params.tsx` (async `params`/`searchParams`/`cookies()`/`headers()`/`draftMode()` patterns for Next.js 16, with 15-to-16 migration examples), `server-action-form.tsx`, `route-handler-api.ts`, `cache-component-use-cache.tsx`, `parallel-routes-with-default.tsx`, `proxy-migration.ts` |
 
 ---
 

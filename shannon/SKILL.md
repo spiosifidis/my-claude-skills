@@ -373,7 +373,7 @@ Automatically translate `localhost` URLs to `host.docker.internal` in the comman
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `ANTHROPIC_API_KEY` | One of these | Direct Anthropic API key |
-| `CLAUDE_CODE_OAUTH_TOKEN` | required | Anthropic OAuth token |
+| `CLAUDE_CODE_OAUTH_TOKEN` | One of these | Anthropic OAuth token |
 | `CLAUDE_CODE_USE_BEDROCK` | | Set to `1` for AWS Bedrock |
 | `CLAUDE_CODE_USE_VERTEX` | | Set to `1` for Google Vertex AI |
 | `CLAUDE_CODE_MAX_OUTPUT_TOKENS` | Recommended | Set to `64000` |

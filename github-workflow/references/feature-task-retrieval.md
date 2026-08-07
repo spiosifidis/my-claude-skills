@@ -41,7 +41,7 @@ Handles fetching task details (title, description, status) from external data so
 ### 2. Discovery (find-skills)
 If no config matches:
 1. **Analyze Input**: Identify type (URL domain or text keywords).
-2. **Find Skill**: Run `npx skills find <keyword>` (e.g., `npx skills find clickup`).
+2. **Find Skill**: Use the `find-skills` skill to search for a relevant skill (e.g., search for "clickup").
 3. **Verify Source**: Check if the found skill/source is from a trusted provider.
 4. **Confirm & Save**:
    - Present found skills/commands to the user.
