@@ -44,6 +44,37 @@ Write code before the test? Delete it. Start over.
 
 Implement fresh from tests. Period.
 
+## Pick the Seam First
+
+Before writing RED, decide which boundary the test verifies. A seam is a public interface a caller actually depends on — a Server Action, an exported function, an RPC call, an API route. Test there. Testing anywhere else means testing accidents of implementation, not behavior.
+
+**Ask:** "What would break for a caller if this changed?" That's the seam. Test it.
+
+Example: a Server Action that validates with Zod, then calls a Supabase RPC function.
+
+<Good>
+```typescript
+test('createOrder rejects negative quantity', async () => {
+  const result = await createOrder({ productId: 'p1', quantity: -1 });
+  expect(result.error).toBe('Quantity must be positive');
+});
+```
+Tests the Server Action's public contract — what a form submission actually depends on. Doesn't care whether validation happens in Zod, in the action, or in the database function.
+</Good>
+
+<Bad>
+```typescript
+test('quantitySchema rejects negative numbers', () => {
+  expect(() => quantitySchema.parse(-1)).toThrow();
+});
+```
+Tests an implementation detail no caller touches directly. Passes even if `createOrder` forgets to call it.
+</Bad>
+
+**Not sure which layer to test — the Zod schema, the Server Action, or the RPC function?** Test the outermost one a caller actually calls. Push validation logic down; test the boundary up.
+
+**Refactoring behind the seam should be free.** Moving validation from the Server Action into the RPC function, or swapping Zod for another library, shouldn't break the seam test. If it does, the test was coupled to internals, not the seam.
+
 ## Red-Green-Refactor
 
 ```dot
