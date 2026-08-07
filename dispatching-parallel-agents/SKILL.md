@@ -1,6 +1,6 @@
 ---
 name: dispatching-parallel-agents
-description: Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies
+description: Run independent tasks concurrently by dispatching one subagent per task. Use when facing 2+ tasks with no shared state or ordering dependencies — batch investigations, multi-file migrations, parallel research or audits — or whenever the user asks to parallelize work or "fan out" agents.
 ---
 
 # Dispatching Parallel Agents

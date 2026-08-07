@@ -1,6 +1,6 @@
 ---
 name: writing-skills
-description: Use when creating new skills, editing existing skills, or verifying skills work before deployment
+description: Create new Claude Code skills or edit existing ones following proven structure and writing patterns, then verify they work before deployment. Use when the user wants to write, improve, restructure, test, or debug a skill or SKILL.md file, or asks how skills should be structured or described.
 ---
 
 # Writing Skills
