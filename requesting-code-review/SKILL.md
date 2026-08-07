@@ -1,6 +1,6 @@
 ---
 name: requesting-code-review
-description: Use when completing tasks, implementing major features, or before merging to verify work meets requirements
+description: Dispatch an independent code-reviewer subagent to verify completed work meets requirements and catch issues the author is blind to. Use when completing any task or major feature, before merging a branch, or before opening a PR — even when the user doesn't explicitly ask for review.
 ---
 
 # Requesting Code Review

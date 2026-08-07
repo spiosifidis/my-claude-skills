@@ -1,6 +1,6 @@
 ---
 name: image-enhancer
-description: Improves the quality of images, especially screenshots, by enhancing resolution, sharpness, and clarity. Perfect for preparing images for presentations, documentation, or social media posts.
+description: Improve image quality — upscale resolution and enhance sharpness and clarity, especially for screenshots. Use when the user asks to enhance, upscale, sharpen, or "make clearer" an image or screenshot, or to prepare images for presentations, documentation, or social media posts.
 ---
 
 # Image Enhancer

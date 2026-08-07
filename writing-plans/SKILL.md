@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Use when you have a spec or requirements for a multi-step task, before touching code
+description: Turn a spec or requirements into a detailed step-by-step implementation plan before touching code. Use when you have requirements for any multi-step task, when the user says "write a plan" or "plan this feature", or before starting implementation work large enough to span multiple files or sessions.
 ---
 
 # Writing Plans

@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: Use when implementing any feature or bugfix, before writing implementation code
+description: Red-green-refactor discipline — write the failing test before any implementation code. Use when implementing any feature or bugfix, whenever the user asks to add functionality, fix a bug, or change behavior, BEFORE writing implementation code — even when the user doesn't mention tests.
 ---
 
 # Test-Driven Development (TDD)
