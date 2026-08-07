@@ -39,6 +39,22 @@ else
   echo "==> Skill-invocation reminder already present in ${CLAUDE_MD}"
 fi
 
+# Keep this machine in sync automatically: a weekly cron that re-runs the
+# global skills update (Mondays 09:00 local). Guarded so re-runs never add
+# duplicate entries. Skipped quietly where cron isn't available (e.g. Windows).
+NPX_BIN="$(command -v npx)"
+if command -v crontab >/dev/null 2>&1; then
+  CRON_TAG="# my-claude-skills-auto-update"
+  if ! crontab -l 2>/dev/null | grep -qF "${CRON_TAG}"; then
+    (crontab -l 2>/dev/null; echo "0 9 * * 1 ${NPX_BIN} --yes skills update -g -y >/dev/null 2>&1 ${CRON_TAG}") | crontab -
+    echo "==> Added weekly auto-update cron (Mondays 09:00)"
+  else
+    echo "==> Weekly auto-update cron already present"
+  fi
+else
+  echo "==> crontab not available — skipping auto-update schedule (re-run this script to update manually)"
+fi
+
 echo ""
 echo "Done. $(ls -1 "${HOME}/.claude/skills" 2>/dev/null | wc -l | tr -d ' ') entries now in ~/.claude/skills."
 echo "New skills are picked up the next time you start a Claude Code session."
