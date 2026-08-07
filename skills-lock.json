@@ -79,6 +79,12 @@
       "skillPath": "plugins/nextjs/skills/nextjs/SKILL.md",
       "computedHash": "00bca76704da4d45fb490f761f07cff0c541b5e8e75e5dd8379d3f803da6d02e"
     },
+    "playwright-cli": {
+      "source": "microsoft/playwright-cli",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-cli/SKILL.md",
+      "computedHash": "f602822b51bcb6d033749c60731b8f1e80f308222fcb2e4af551905a817c6e08"
+    },
     "react-hook-form-zod": {
       "source": "secondsky/claude-skills",
       "sourceType": "github",
