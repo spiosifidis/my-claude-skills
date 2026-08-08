@@ -16,11 +16,8 @@ if ! command -v npx >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "==> Installing all skills from ${REPO} into user scope (~/.claude/skills)..."
+echo "==> Installing/syncing all skills from ${REPO} into user scope (~/.claude/skills)..."
 npx --yes skills add "${REPO}" -s '*' -g -y
-
-echo "==> Updating any previously installed global skills..."
-npx --yes skills update -g -y || true
 
 # Make skill invocation reliable: a one-line nudge in the global CLAUDE.md so
 # every session checks installed skills before answering. Guarded so re-runs
@@ -57,7 +54,10 @@ STAMP="\${HOME}/.claude/.skills-last-update"
 NOW=\$(date +%s)
 LAST=\$(cat "\${STAMP}" 2>/dev/null || echo 0)
 if [ "\${1:-}" = "--force" ] || [ \$((NOW - LAST)) -ge 604800 ]; then
-  if ${NPX_BIN} --yes skills update -g -y >/dev/null 2>&1; then
+  # Re-add (idempotent) rather than 'skills update': update -g has been
+  # observed to silently skip refreshing changed skills from this repo,
+  # while add always syncs to current main.
+  if ${NPX_BIN} --yes skills add "${REPO}" -s '*' -g -y >/dev/null 2>&1; then
     echo "\${NOW}" > "\${STAMP}"
   fi
 fi
