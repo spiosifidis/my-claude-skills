@@ -348,6 +348,12 @@
       "sourceType": "github",
       "skillPath": "writing-skills/SKILL.md",
       "computedHash": "792e9d25ed6fbe38561202af07e6dd570060f745f9b8f4c71d6d13e7bc9597fa"
+    },
+    "route": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "route/SKILL.md",
+      "computedHash": "9d2bad2fc4fbfdd7e443d0555bc6badff19485d48fd44d368a474c3312bc45ea"
     }
   }
 }
