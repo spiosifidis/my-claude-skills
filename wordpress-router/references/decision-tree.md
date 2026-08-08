@@ -19,34 +19,31 @@ If multiple kinds match, prefer the most specific:
 
 ## Step 2: route by user intent (keywords)
 
-Route by intent even if repo kind is broad (like `wp-site`):
+Route by intent even if repo kind is broad (like `wp-site`).
 
-- **Interactivity API / data-wp-* directives / @wordpress/interactivity / viewScriptModule**
-  - Route → `wp-interactivity-api`.
-- **Abilities API / wp_register_ability / wp-abilities/v1 / @wordpress/abilities**
-  - Route → `wp-abilities-api`.
-- **Playground / run-blueprint / build-snapshot / @wp-playground/cli / playground.wordpress.net**
-  - Route → `wp-playground`.
-- **Blocks / block.json / registerBlockType / attributes / save serialization**
-  - Route → `wp-block-development`.
+**Routing rule — never stall:** only invoke a route target that actually appears in your installed skills list. If the matching skill below is marked *(no local skill)* or the invocation fails, do NOT retry, search, or wait — handle the task directly with general WordPress knowledge and move on. A missing skill is a normal outcome, not an error to resolve.
+
+Installed skills in this collection:
+
 - **theme.json / Global Styles / templates/*.html / patterns/**
   - Route → `wp-block-themes`.
-- **Plugins / hooks / activation hook / uninstall / Settings API / admin pages**
-  - Route → `wp-plugin-development`.
-- **REST endpoint / register_rest_route / permission_callback**
-  - Route → `wp-rest-api`.
-- **WP-CLI / wp-cli.yml / commands**
+- **WP-CLI / wp-cli.yml / commands / db export/import / search-replace**
   - Route → `wp-wpcli-and-ops`.
-- **Build tooling / @wordpress/scripts / webpack / Vite / npm scripts**
-  - Route → `wp-build-tooling` (planned).
-- **Testing / PHPUnit / wp-env / Playwright**
-  - Route → `wp-testing` (planned).
-- **PHPStan / static analysis / phpstan.neon / phpstan-baseline.neon**
-  - Route → `wp-phpstan`.
 - **Performance / caching / query profiling / editor slowness**
   - Route → `wp-performance`.
-- **Security / nonces / capabilities / sanitization/escaping / uploads**
-  - Route → `wp-security` (planned).
+
+Topics with *(no local skill)* — handle directly, optionally check the marketplace with `npx skills find <topic>` first:
+
+- **Interactivity API / data-wp-* directives / @wordpress/interactivity** *(no local skill)*
+- **Abilities API / wp_register_ability / @wordpress/abilities** *(no local skill)*
+- **Playground / run-blueprint / @wp-playground/cli** *(no local skill)*
+- **Blocks / block.json / registerBlockType / save serialization** *(no local skill)*
+- **Plugins / hooks / activation hook / Settings API / admin pages** *(no local skill)*
+- **REST endpoint / register_rest_route / permission_callback** *(no local skill)*
+- **Build tooling / @wordpress/scripts / webpack / Vite** *(no local skill)*
+- **Testing / PHPUnit / wp-env / Playwright** *(no local skill)*
+- **PHPStan / static analysis / phpstan.neon** *(no local skill)*
+- **Security / nonces / capabilities / sanitization/escaping** *(no local skill)*
 
 ## Step 3: guardrails checklist (always)
 

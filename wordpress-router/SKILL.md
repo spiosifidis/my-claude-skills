@@ -30,6 +30,7 @@ Use this skill at the start of most WordPress tasks to:
    - any version hints.
 3. Route to domain workflows based on user intent + repo kind:
    - For the decision tree, read: `references/decision-tree.md`.
+   - Only invoke route targets that exist in your installed skills; if a target is missing or fails to load, handle the task directly — never retry or block on it.
 4. Apply guardrails before making changes:
    - Confirm any version constraints if unclear.
    - Prefer the repo’s existing tooling and conventions for builds/tests.
