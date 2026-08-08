@@ -99,3 +99,8 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | Skill | When to use |
 |---|---|
 | skill-creator | Build new custom skills |
+
+### Multi-Agent Delegation
+| Skill | When to use |
+|---|---|
+| route | Delegate a substantial task to Codex (ChatGPT) as a background worker |
