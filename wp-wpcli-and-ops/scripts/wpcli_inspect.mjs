@@ -19,11 +19,17 @@ function runWp(cmdArgs, { pathArg, urlArg, allowRoot }) {
   if (urlArg) args.push(`--url=${urlArg}`);
   args.push(...cmdArgs);
 
-  const out = spawnSync("wp", args, { encoding: "utf8" });
+  // timeout + closed stdin: WP-CLI can hang forever on an unreachable DB or a
+  // password prompt; fail fast instead of blocking the whole inspection.
+  const out = spawnSync("wp", args, { encoding: "utf8", timeout: 30_000, input: "" });
+  const timedOut = out.error?.code === "ETIMEDOUT" || out.signal === "SIGTERM";
   return {
     ok: out.status === 0,
     status: out.status,
-    error: out.error ? { message: out.error.message, code: out.error.code } : null,
+    timedOut,
+    error: timedOut
+      ? { message: "wp command timed out after 30s (unreachable DB or interactive prompt?)", code: "ETIMEDOUT" }
+      : out.error ? { message: out.error.message, code: out.error.code } : null,
     stdout: (out.stdout || "").trim(),
     stderr: (out.stderr || "").trim(),
     args,
