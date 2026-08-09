@@ -55,3 +55,17 @@ The plugin's own `codex-rescue` subagent defaults to this unbounded foreground p
 - **Codex missing or unauthenticated** → tell the user to run `/codex:setup`. Do not retry silently or attempt a workaround.
 - **Job status is `failed`** → surface the stored error message verbatim so the user can act on it, not a summary that drops the detail.
 - **You catch yourself about to invoke the `codex-rescue` subagent directly, or add `--wait` to a foreground `task` call** → stop. That's the unbounded path this skill exists to avoid. Use the background-and-poll procedure above instead, every time, even for tasks that feel small.
+
+## If you ever call `codex exec` directly (not through this skill's app-server path)
+
+The procedure above never shells out to `codex exec` — `codex-companion.mjs` talks to a persistent `codex app-server` process over JSON-RPC instead, so it isn't exposed to the bug below. But a delegated task can end up invoking `codex exec` directly (e.g. a worker script that shells out to it), and this bites hard enough to document explicitly:
+
+`codex exec "<prompt>"` expects the prompt as a complete positional argument. If argument passing is broken — most commonly a shell-quoting issue substituting a long prompt via `"$(cat file)"` or similar — Codex doesn't error, it silently falls into interactive mode and prints `Reading additional input from stdin...`, then blocks forever waiting for a human to type something that will never arrive. This is invisible until you check the process's own output, not the calling shell's.
+
+It reproduces specifically when backgrounded and can look identical to a network hang. The fix is unconditional, not case-by-case: **always redirect stdin from `/dev/null` when running `codex exec` via Bash, especially with `run_in_background: true`** —
+
+```bash
+codex exec "<prompt>" < /dev/null
+```
+
+With no input available, a broken argument pass fails fast with a clear error instead of hanging silently. Apply this to every `codex exec` invocation, not just backgrounded ones — foreground runs are just as vulnerable, they're only less likely to go unnoticed for 30 minutes.
