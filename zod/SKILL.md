@@ -79,13 +79,13 @@ Zod is a TypeScript-first validation library that enables developers to define s
 ## Installation
 
 ```bash
-npm install zod
-# or
-pnpm add zod
-# or
-yarn add zod
+bun add zod
 # or
 bun add zod
+# or
+bun add zod
+# or
+yarn add zod
 ```
 
 **Requirements**:
@@ -131,7 +131,7 @@ import { z } from "zod";
 const UserSchema = z.object({
   username: z.string(),
   age: z.number().int().positive(),
-  email: z.string().email(),
+  email: z.email(),
 });
 
 // Infer TypeScript type
@@ -169,8 +169,8 @@ z.string()                    // Basic string
 z.string().min(5)            // Minimum length
 z.string().max(100)          // Maximum length
 z.string().length(10)        // Exact length
-z.string().email()           // Email validation
-z.string().url()             // URL validation
+z.email()                    // Email validation (top-level in v4)
+z.url()                      // URL validation (top-level in v4)
 z.string().uuid()            // UUID format
 z.string().regex(/^\d+$/)    // Custom pattern
 z.string().startsWith("pre") // Prefix check
@@ -451,10 +451,10 @@ z.string({ error: "Custom message" });
 z.string().min(5, "Too short");
 
 // 2. Per-parse level
-schema.parse(data, { error: (issue) => ({ message: "..." }) });
+schema.parse(data, { error: (issue) => "..." });
 
 // 3. Global level
-z.config({ customError: (issue) => ({ message: "..." }) });
+z.config({ customError: (issue) => "..." });
 ```
 
 **Localization** (40+ languages):
@@ -495,7 +495,7 @@ const jsonSchema = z.toJSONSchema(UserSchema, {
 **Metadata**:
 ```typescript
 // Add metadata
-const EmailSchema = z.string().email().meta({
+const EmailSchema = z.email().meta({
   title: "Email Address",
   description: "User's email address",
 });
@@ -537,7 +537,7 @@ const FetchFunction = z.function()
 ```typescript
 const EnvSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]),
-  DATABASE_URL: z.string().url(),
+  DATABASE_URL: z.url(),
   PORT: z.coerce.number().int().positive().default(3000),
   API_KEY: z.string().min(32),
 });
@@ -554,7 +554,7 @@ console.log(env.PORT); // number
 ```typescript
 const CreateUserRequest = z.object({
   username: z.string().min(3).max(20),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8),
   age: z.number().int().positive().optional(),
 });
@@ -580,10 +580,10 @@ app.post("/users", async (req, res) => {
 const FormSchema = z.object({
   firstName: z.string().min(1, "First name required"),
   lastName: z.string().min(1, "Last name required"),
-  email: z.string().email("Invalid email"),
+  email: z.email({ error: "Invalid email" }),
   age: z.coerce.number().int().min(18, "Must be 18+"),
   agreeToTerms: z.literal(true, {
-    errorMap: () => ({ message: "Must accept terms" }),
+    error: () => "Must accept terms",
   }),
 });
 
@@ -596,7 +596,7 @@ type FormData = z.infer<typeof FormSchema>;
 const UserSchema = z.object({
   id: z.string(),
   name: z.string(),
-  email: z.string().email(),
+  email: z.email(),
 });
 
 // For PATCH requests: make everything optional except id

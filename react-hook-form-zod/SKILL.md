@@ -40,7 +40,7 @@ license: MIT
 **Status**: Production Ready ✅
 **Last Updated**: 2025-11-21
 **Dependencies**: None (standalone)
-**Latest Versions**: react-hook-form@7.66.1, zod@4.1.12, @hookform/resolvers@5.2.2
+**Latest Versions**: react-hook-form@7.84.0, zod@4.3.6, @hookform/resolvers@5.2.2
 
 ---
 
@@ -49,7 +49,7 @@ license: MIT
 ### 1. Install Packages
 
 ```bash
-bun add react-hook-form@7.66.1 zod@4.1.12 @hookform/resolvers@5.2.2
+bun add react-hook-form@7.84.0 zod@4.3.6 @hookform/resolvers@5.2.2
 ```
 
 **Why These Packages**:
@@ -66,7 +66,7 @@ import { z } from 'zod'
 
 // 1. Define validation schema
 const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: z.email({ error: 'Invalid email address' }),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
@@ -139,7 +139,7 @@ import { z } from 'zod'
 
 // SAME schema on server
 const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: z.email({ error: 'Invalid email address' }),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
@@ -150,7 +150,7 @@ export async function loginHandler(req: Request) {
     return { success: true }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return { success: false, errors: error.flatten().fieldErrors }
+      return { success: false, errors: z.flattenError(error).fieldErrors }
     }
     throw error
   }
@@ -162,7 +162,7 @@ export async function loginHandler(req: Request) {
 - Server validation is your security layer
 - Same Zod schema = single source of truth
 
-**Template**: See `templates/server-validation.ts`
+**Template**: See `templates/server-validation.tsx`
 
 ---
 
@@ -203,7 +203,7 @@ import { z } from 'zod'
 
 // Basic types
 const schema = z.object({
-  email: z.string().email('Invalid email'),
+  email: z.email({ error: 'Invalid email' }),
   age: z.number().min(18, 'Must be 18+'),
   terms: z.boolean().refine(val => val === true, 'Must accept terms'),
 })
@@ -212,7 +212,7 @@ const schema = z.object({
 const addressSchema = z.object({
   user: z.object({
     name: z.string(),
-    email: z.string().email(),
+    email: z.email(),
   }),
   address: z.object({
     street: z.string(),
@@ -389,7 +389,7 @@ import { z } from 'zod'
 
 const schema = z.object({
   name: z.string().min(1, 'Name required'),
-  email: z.string().email('Invalid email'),
+  email: z.email({ error: 'Invalid email' }),
 })
 
 type FormData = z.infer<typeof schema>
@@ -567,7 +567,7 @@ Copy-paste ready examples:
 - **multi-step-form.tsx** - Wizard/stepper forms with step validation
 - **dynamic-fields.tsx** - useFieldArray for dynamic form fields
 - **async-validation.tsx** - Async field validation (username check, etc.)
-- **server-validation.ts** - Server-side validation with Zod
+- **server-validation.tsx** - Server-side validation with Zod
 - **custom-error-display.tsx** - Custom error message components
 - **package.json** - Package versions and scripts
 
@@ -632,7 +632,7 @@ Detailed documentation:
 **Common Patterns**:
 ```typescript
 // Email
-z.string().email('Invalid email')
+z.email({ error: 'Invalid email' })
 
 // Password (min 8 chars, 1 uppercase, 1 number)
 z.string()
@@ -641,10 +641,10 @@ z.string()
   .regex(/[0-9]/, 'Need number')
 
 // URL
-z.string().url('Invalid URL')
+z.url({ error: 'Invalid URL' })
 
 // Date
-z.string().datetime() // ISO 8601
+z.datetime() // ISO 8601
 z.date() // JS Date object
 
 // File upload
@@ -678,8 +678,8 @@ z.string().refine(
 ## Dependencies
 
 **Required**:
-- `react-hook-form@7.66.1` - Form state management
-- `zod@4.1.12` - Schema validation
+- `react-hook-form@7.84.0` - Form state management
+- `zod@4.3.6` - Schema validation
 - `@hookform/resolvers@5.2.2` - Validation adapter
 
 **Optional**:
