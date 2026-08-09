@@ -5,67 +5,59 @@ description: Delegate a substantial coding task to Codex (OpenAI's coding agent,
 
 # Route — delegate to Codex as a background worker
 
-You are the administrator: you scope the task, launch the worker, check in on a bounded schedule, and report back. Codex is the worker: it does the actual investigation/implementation, out of process, on its own turn.
+You are the administrator: you scope the task, launch the worker, review what comes back, and decide whether to iterate. Codex is the worker: it does the actual investigation/implementation, out of process, on its own turn.
 
-## Why background-only — read this before invoking anything
+## Why this skill exists — the hang bugs it guards against
 
-The underlying delegation mechanism (the `openai/codex-plugin-cc` Claude Code plugin's `codex-companion.mjs task` command) has a confirmed bug in its **foreground** path: `codex-companion.mjs` → `runTrackedJob` → `codex.mjs`'s `await state.completion` has **no timeout anywhere in that call chain**. If Codex's app-server ever drops a completion notification for a nested turn (network hiccup, a stalled call to OpenAI, a lost subagent-turn event), that `await` blocks forever with no recovery — and because it runs in the foreground, it hangs your entire session, not just the delegated task.
+The underlying plugin (`openai/codex-plugin-cc`) has a confirmed bug in its **foreground** task path: `codex-companion.mjs` → `runTrackedJob` → `codex.mjs`'s `await state.completion` has **no timeout anywhere in that call chain**. A dropped completion notification (network hiccup, stalled OpenAI call, lost subagent-turn event) blocks that await forever and hangs the entire session. The plugin's own `codex-rescue` subagent defaults to that path — never invoke it directly, and never add `--wait` to a foreground `task` call.
 
-The plugin's own `codex-rescue` subagent defaults to this unbounded foreground path for anything it judges "small, clearly bounded." Do not trust that judgment call. **This skill only ever uses `--background`.** The background path writes progress to a job file you poll yourself, so a stall is visible and recoverable instead of an invisible hang.
+This skill's bundled wrapper, `scripts/route.mjs`, encodes the safe discipline so it can't be improvised wrong: background-only launches, stdin closed on every call, a 60s hard timeout on every companion invocation, and a bounded watch loop that reports "still running" instead of blocking.
 
 ## Prerequisites
 
 - The `openai/codex-plugin-cc` plugin installed: `/plugin marketplace add openai/codex-plugin-cc` then `/plugin install codex@openai-codex`.
-- Codex authenticated (ChatGPT login or an OpenAI API key). If unsure, run `/codex:setup` first — do not guess or retry blindly if it reports Codex missing/unauthenticated.
+- Codex authenticated (ChatGPT login or an OpenAI API key). If the wrapper reports the companion script missing, run `/codex:setup` — do not guess paths or retry blindly.
 
 ## Procedure
 
-1. **Locate the companion script** (its path varies by how the plugin was installed — don't hardcode it):
+All commands run from this skill's directory (`scripts/route.mjs` resolves the plugin's companion script automatically; set `ROUTE_COMPANION=/path/to/codex-companion.mjs` only if auto-discovery fails).
+
+1. **Scope the task first.** The worker starts with no memory of this conversation. Write a self-contained prompt: the goal, the relevant files/paths, constraints, and what "done" looks like. For long prompts, write them to a file and pass `--prompt-file` — never rely on shell substitution of large strings into arguments.
+
+2. **Launch and watch in one bounded step:**
    ```bash
-   find ~/.claude ~/.config -maxdepth 8 -iname "codex-companion.mjs" 2>/dev/null | head -1
+   node scripts/route.mjs run --ceiling-s 600 "<self-contained prompt>"
    ```
-   If nothing is found, stop and tell the user to run `/codex:setup` — do not fabricate a path.
+   - Writes are enabled by default; add `--read-only` for pure investigation/diagnosis.
+   - `--model spark` maps to `gpt-5.3-codex-spark` (the fast variant); otherwise leave model unset.
+   - `--effort <none|minimal|low|medium|high|xhigh>` only when the user explicitly asks.
+   - `--ceiling-s` defaults to 600 (10 min). Raise it only for jobs the user expects to run long — and say so upfront.
+   - Or split the phases: `launch` returns a `jobId` immediately so you can do other work, then `watch <jobId>` later.
 
-2. **Scope the task before launching.** The worker starts with no memory of this conversation. Write a self-contained prompt: the goal, the relevant files/context, and what "done" looks like. Vague prompts produce vague results and waste a full round-trip.
+3. **Interpret the exit code — each one has a defined next step:**
+   - `0` — worker finished; stdout is the result. Present it substantively (keep file paths, error messages, diffs — don't paraphrase them away).
+   - `1` — job failed or was cancelled; stdout carries the stored error verbatim. Surface it as-is.
+   - `3` — ceiling reached, job **still running in the background**. Not an error. Relay the printed follow-up commands to the user (`/codex:status`, `/codex:result`, `/codex:cancel` with the jobId) or keep working on something else and re-run `watch <jobId>` later.
+   - `2` — setup/usage problem (companion not found, no prompt). Fix the stated cause; if Codex is missing or unauthenticated, tell the user to run `/codex:setup`.
 
-3. **Launch in the background, always:**
+## Administrator review loop
+
+Delegation isn't fire-and-forget — review the worker's output before accepting it:
+
+1. When a run completes, **verify the claims**: if it says it changed files, look at the diff (`git diff`/`git status`); if it says tests pass, run them yourself. Codex's summary is a report, not proof.
+2. If the result is incomplete or off-target, **iterate on the same thread** rather than starting over — the worker keeps its context:
    ```bash
-   node "<companion-script-path>" task --background --write "<self-contained prompt>"
+   node scripts/route.mjs run --resume --ceiling-s 600 "<specific follow-up: what's wrong, what to do next>"
    ```
-   - Drop `--write` for read-only investigation/diagnosis only — keep it for anything that should actually change files.
-   - Add `--model gpt-5.3-codex-spark` if the user asks for the fast/"spark" variant; otherwise leave `--model` unset and let Codex use its default.
-   - This returns immediately with a `jobId`. It does not block — if it appears to hang here, that itself is the bug above; kill it and fall back to reporting the problem rather than waiting.
+3. Bound the loop: **at most 3 rounds** unless the user asks for more. If it's not converging by then, stop delegating and either do the work directly or bring the findings back to the user.
+4. Only start a fresh thread (omit `--resume`) when the follow-up is genuinely a different task.
 
-4. **Poll on a bounded schedule you control — do not chain an unbounded `--wait`:**
-   ```bash
-   node "<companion-script-path>" status <jobId> --json
-   ```
-   Check every 15-30s. Set a total ceiling appropriate to the task (default 10 minutes for routine delegation; only go longer if the user explicitly expects a long-running job, and say so upfront).
+## If anything ever calls `codex exec` directly
 
-5. **If the ceiling is reached before completion:** stop polling. Tell the user the job is still running in the background as `<jobId>`, and give them the exact follow-up commands: `/codex:status <jobId>` to check progress, `/codex:result <jobId>` to fetch the result once done, `/codex:cancel <jobId>` to abort. Never let this turn block indefinitely on someone else's process.
+This skill's path never does — the companion talks JSON-RPC to a persistent `codex app-server`, immune to the bug below. But delegated tasks or ad-hoc commands sometimes shell out to `codex exec`, and this bites hard: if argument passing breaks (typically shell-quoting a long prompt via `"$(cat file)"`), `codex exec` doesn't error — it silently drops into interactive mode (`Reading additional input from stdin...`) and waits forever for keyboard input that never comes. Backgrounded, that's invisible for however long you let it sit.
 
-6. **On completion**, fetch and present the result:
-   ```bash
-   node "<companion-script-path>" result <jobId>
-   ```
-   Return Codex's output substantively — don't paraphrase away specifics like file paths, error messages, or exact diffs.
-
-## Failure modes
-
-- **Codex missing or unauthenticated** → tell the user to run `/codex:setup`. Do not retry silently or attempt a workaround.
-- **Job status is `failed`** → surface the stored error message verbatim so the user can act on it, not a summary that drops the detail.
-- **You catch yourself about to invoke the `codex-rescue` subagent directly, or add `--wait` to a foreground `task` call** → stop. That's the unbounded path this skill exists to avoid. Use the background-and-poll procedure above instead, every time, even for tasks that feel small.
-
-## If you ever call `codex exec` directly (not through this skill's app-server path)
-
-The procedure above never shells out to `codex exec` — `codex-companion.mjs` talks to a persistent `codex app-server` process over JSON-RPC instead, so it isn't exposed to the bug below. But a delegated task can end up invoking `codex exec` directly (e.g. a worker script that shells out to it), and this bites hard enough to document explicitly:
-
-`codex exec "<prompt>"` expects the prompt as a complete positional argument. If argument passing is broken — most commonly a shell-quoting issue substituting a long prompt via `"$(cat file)"` or similar — Codex doesn't error, it silently falls into interactive mode and prints `Reading additional input from stdin...`, then blocks forever waiting for a human to type something that will never arrive. This is invisible until you check the process's own output, not the calling shell's.
-
-It reproduces specifically when backgrounded and can look identical to a network hang. The fix is unconditional, not case-by-case: **always redirect stdin from `/dev/null` when running `codex exec` via Bash, especially with `run_in_background: true`** —
-
+Rule, no exceptions: **always close stdin on `codex exec`** —
 ```bash
 codex exec "<prompt>" < /dev/null
 ```
-
-With no input available, a broken argument pass fails fast with a clear error instead of hanging silently. Apply this to every `codex exec` invocation, not just backgrounded ones — foreground runs are just as vulnerable, they're only less likely to go unnoticed for 30 minutes.
+A broken argument pass then fails fast with a clear error instead of hanging. (The wrapper already does the equivalent for every companion call.)
