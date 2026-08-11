@@ -17,7 +17,20 @@ if ! command -v npx >/dev/null 2>&1; then
 fi
 
 echo "==> Installing/syncing all skills from ${REPO} into user scope (~/.claude/skills)..."
-npx --yes skills add "${REPO}" -s '*' -g -y
+# The skills CLI targets many agents (Claude Code, Codex, PromptScript, ...)
+# and reports a non-zero exit whenever ANY per-agent target fails — including
+# expected, benign cases (an agent that doesn't support global installs, a
+# stray permission issue on one target). Under `set -e` that non-zero exit
+# silently killed the rest of this script on every real-world run — the
+# CLAUDE.md reminder, the updater, cron, and rc hooks never got installed,
+# with no error surfaced. `|| true` here means a genuine total failure (e.g.
+# network down, repo unreachable) is caught by the exit-code check below
+# instead of aborting silently.
+npx --yes skills add "${REPO}" -s '*' -g -y || true
+if [ ! -d "${HOME}/.claude/skills" ] || [ -z "$(ls -A "${HOME}/.claude/skills" 2>/dev/null)" ]; then
+  echo "error: no skills were installed to ~/.claude/skills — check the output above for the cause (network, auth, or a missing 'npx')." >&2
+  exit 1
+fi
 
 # Make skill invocation reliable: a one-line nudge in the global CLAUDE.md so
 # every session checks installed skills before answering. Guarded so re-runs
