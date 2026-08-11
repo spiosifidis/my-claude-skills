@@ -17,16 +17,29 @@ if ! command -v npx >/dev/null 2>&1; then
 fi
 
 echo "==> Installing/syncing all skills from ${REPO} into user scope (~/.claude/skills)..."
-# The skills CLI targets many agents (Claude Code, Codex, PromptScript, ...)
-# and reports a non-zero exit whenever ANY per-agent target fails — including
-# expected, benign cases (an agent that doesn't support global installs, a
-# stray permission issue on one target). Under `set -e` that non-zero exit
-# silently killed the rest of this script on every real-world run — the
-# CLAUDE.md reminder, the updater, cron, and rc hooks never got installed,
-# with no error surfaced. `|| true` here means a genuine total failure (e.g.
-# network down, repo unreachable) is caught by the exit-code check below
-# instead of aborting silently.
-npx --yes skills add "${REPO}" -s '*' -g -y || true
+# Two separate bugs, both confirmed on a real curl | bash run, live here:
+#
+# 1. stdin theft (the actual root cause of the whole script silently dying
+#    after this line, every time, on a real machine — reproduced with a stub
+#    npx that reads one line from its inherited stdin). When this script
+#    arrives via `curl | bash`, this process's stdin IS the live pipe bash is
+#    still reading the rest of the script from. The skills CLI's TUI
+#    (spinners/prompts) can read from its inherited stdin even with -y/--yes
+#    passed, which silently steals the NEXT LINE of this script out of bash's
+#    parsing stream — in the reproduction, that was the `if [ ! -d ... ];
+#    then` line just below, orphaning the `echo error / exit 1` inside it so
+#    they ran unconditionally as top-level statements. `< /dev/null` detaches this
+#    process's stdin from the shared pipe entirely, so it hits EOF instantly
+#    instead of reading live script bytes.
+#
+# 2. non-zero exit on partial success. The skills CLI targets many agents
+#    (Claude Code, Codex, PromptScript, ...) and exits non-zero whenever ANY
+#    per-agent target fails — including expected, benign ones (an agent that
+#    doesn't support global installs at all). Under `set -e` that would kill
+#    the rest of this script too. `|| true` defers to the real check just
+#    below instead: a genuine total failure (network down, repo unreachable)
+#    is still caught there, but a benign partial failure isn't fatal.
+npx --yes skills add "${REPO}" -s '*' -g -y < /dev/null || true
 if [ ! -d "${HOME}/.claude/skills" ] || [ -z "$(ls -A "${HOME}/.claude/skills" 2>/dev/null)" ]; then
   echo "error: no skills were installed to ~/.claude/skills — check the output above for the cause (network, auth, or a missing 'npx')." >&2
   exit 1
