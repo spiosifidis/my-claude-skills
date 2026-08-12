@@ -303,13 +303,20 @@ function stillRunningNotice(jobId, ceilingMs) {
   process.exit(3);
 }
 
-function doWatch(argv) {
+// async on purpose: the sleep must yield to the event loop. With a blocking
+// sleep (Atomics.wait), Node can never reap a detached child that exits while
+// we watch it from the same process (run = launch+watch) — the child lingers
+// as a zombie, kill(pid, 0) keeps succeeding, and the pid-liveness fallback
+// reads "running" forever. An event-loop-friendly sleep lets libuv reap
+// exited children, so the fallback stays truthful.
+async function doWatch(argv) {
   const { flags, rest } = parseFlags(argv, { valueFlags: ["--ceiling-s", "--interval-s"] });
   const jobId = rest[0];
   if (!jobId) fail("watch requires a jobId");
   const ceilingMs = Math.max(10, Number(flags["--ceiling-s"]) || DEFAULT_CEILING_S) * 1000;
   const intervalMs = Math.max(5, Number(flags["--interval-s"]) || DEFAULT_INTERVAL_S) * 1000;
   const deadline = Date.now() + ceilingMs;
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   if (isExecJobId(jobId)) {
     while (Date.now() < deadline) {
@@ -322,7 +329,7 @@ function doWatch(argv) {
         process.stdout.write(s.output + "\n");
         process.exit(s.exitCode === 0 ? 0 : 1);
       }
-      sleepSync(Math.min(intervalMs, Math.max(0, deadline - Date.now())));
+      await sleep(Math.min(intervalMs, Math.max(0, deadline - Date.now())));
     }
     stillRunningNotice(jobId, ceilingMs);
   }
@@ -351,7 +358,7 @@ function doWatch(argv) {
       }
     }
     // Transient status failures are tolerated: keep polling until the ceiling.
-    sleepSync(Math.min(intervalMs, Math.max(0, deadline - Date.now())));
+    await sleep(Math.min(intervalMs, Math.max(0, deadline - Date.now())));
   }
   stillRunningNotice(jobId, ceilingMs);
 }
@@ -410,15 +417,24 @@ switch (cmd) {
     doLaunch(argv);
     break;
   case "watch":
-    doWatch(argv);
+    await doWatch(argv);
     break;
   case "run": {
-    const jobId = doLaunch(argv.filter((a) => !a.startsWith("--ceiling-s") && !a.startsWith("--interval-s")));
-    const keep = [];
+    // Split watch-only flags (WITH their values) from launch args. Filtering
+    // only the flag tokens left their values behind, which got glued onto the
+    // prompt — the worker received "600 20 <actual task>". Value-bearing
+    // flags must always travel as pairs.
+    const launchArgs = [];
+    const watchArgs = [];
     for (let i = 0; i < argv.length; i++) {
-      if (argv[i] === "--ceiling-s" || argv[i] === "--interval-s") keep.push(argv[i], argv[++i]);
+      if (argv[i] === "--ceiling-s" || argv[i] === "--interval-s") {
+        watchArgs.push(argv[i], argv[++i]);
+      } else {
+        launchArgs.push(argv[i]);
+      }
     }
-    doWatch([jobId, ...keep]);
+    const jobId = doLaunch(launchArgs);
+    await doWatch([jobId, ...watchArgs]);
     break;
   }
   case "status":
