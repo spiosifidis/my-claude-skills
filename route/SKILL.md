@@ -13,10 +13,14 @@ The underlying plugin (`openai/codex-plugin-cc`) has a confirmed bug in its **fo
 
 This skill's bundled wrapper, `scripts/route.mjs`, encodes the safe discipline so it can't be improvised wrong: background-only launches, stdin closed on every call, a 60s hard timeout on every companion invocation, and a bounded watch loop that reports "still running" instead of blocking.
 
-## Prerequisites
+## Prerequisites — two backends, auto-selected
 
-- The `openai/codex-plugin-cc` plugin installed: `/plugin marketplace add openai/codex-plugin-cc` then `/plugin install codex@openai-codex`.
-- Codex authenticated (ChatGPT login or an OpenAI API key). If the wrapper reports the companion script missing, run `/codex:setup` — do not guess paths or retry blindly.
+The wrapper picks its backend automatically; you need **one** of:
+
+1. **The codex plugin** (preferred — richer job tracking, resumable threads): `/plugin marketplace add openai/codex-plugin-cc` then `/plugin install codex@openai-codex`, then `/codex:setup`.
+2. **The bare `codex` CLI** on PATH (`npm install -g @openai/codex`, then `codex login`). The wrapper runs `codex exec` detached with stdin closed, captures output to `~/.claude/route-jobs/<jobId>.log`, and tracks completion via a sentinel the shell appends after codex exits. `--resume` is plugin-only (the bare CLI starts fresh, and the wrapper says so out loud); `--read-only` maps to `--sandbox read-only`.
+
+Either way Codex must be authenticated. If the wrapper reports neither backend found, it prints the install commands for both — relay them, don't guess paths or retry blindly.
 
 ## Procedure
 
