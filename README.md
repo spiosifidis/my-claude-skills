@@ -44,6 +44,11 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | savethetokens | Large codebases, long debug sessions, multi-file features |
 | sequential-thinking | Complex schema changes, elusive bugs, large refactors |
 
+### Browser Automation
+| Skill | When to use |
+|---|---|
+| playwright-cli | Navigate sites, fill forms, screenshots, test UI, scrape data. Requires `npm install -g @playwright/cli@latest` first — this skill wraps that CLI, it doesn't bundle it |
+
 ### Design & UI
 | Skill | When to use |
 |---|---|
