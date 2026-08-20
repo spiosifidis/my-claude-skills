@@ -44,11 +44,6 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | savethetokens | Large codebases, long debug sessions, multi-file features |
 | sequential-thinking | Complex schema changes, elusive bugs, large refactors |
 
-### Browser Automation
-| Skill | When to use |
-|---|---|
-| playwright-cli | Navigate sites, fill forms, screenshots, test UI, scrape data |
-
 ### Design & UI
 | Skill | When to use |
 |---|---|
@@ -79,10 +74,6 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | systematic-debugging | Any bug — always before proposing a fix |
 | verification-before-completion | Always before saying "done" or committing |
 | github-workflow | Task-to-PR workflow — branch, commit, create PR |
-
-### Document Handling
-| Skill | When to use |
-|---|---|
 
 ### Writing & Content
 | Skill | When to use |
