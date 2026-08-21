@@ -3,3 +3,5 @@ node_modules/
 .DS_Store
 .claude/settings.local.json
 .claude/skills/
+# playwright-cli writes its own session snapshots here when run from repo root
+.playwright-cli/

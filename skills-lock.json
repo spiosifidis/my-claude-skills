@@ -163,6 +163,12 @@
       "skillPath": "plugins/nextjs/skills/nextjs/SKILL.md",
       "computedHash": "e5560c4777dfd311cd3158a6ceb24524e20cecdd2b16955dde9a349a37995847"
     },
+    "playwright-cli": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "playwright-cli/SKILL.md",
+      "computedHash": "29c0b669a524d42b51934d7db9144c1c07a566d0549ae6fb6ccd810e5a3cf61b"
+    },
     "react-email": {
       "source": "spiosifidis/my-claude-skills",
       "sourceType": "github",

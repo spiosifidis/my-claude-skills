@@ -47,7 +47,7 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 ### Browser Automation
 | Skill | When to use |
 |---|---|
-| playwright-cli | Navigate sites, fill forms, screenshots, test UI, scrape data |
+| playwright-cli | Navigate sites, fill forms, screenshots, test UI, scrape data. Requires `npm install -g @playwright/cli@latest` first — this skill wraps that CLI, it doesn't bundle it |
 
 ### Design & UI
 | Skill | When to use |
@@ -79,10 +79,6 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | systematic-debugging | Any bug — always before proposing a fix |
 | verification-before-completion | Always before saying "done" or committing |
 | github-workflow | Task-to-PR workflow — branch, commit, create PR |
-
-### Document Handling
-| Skill | When to use |
-|---|---|
 
 ### Writing & Content
 | Skill | When to use |
