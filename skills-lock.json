@@ -67,6 +67,12 @@
       "skillPath": "changelog-generator/SKILL.md",
       "computedHash": "18c041008f0bf920188122a9b3334b0bb451343d399c52eeb0dd8b496773a951"
     },
+    "claude-doctor": {
+      "source": "spiosifidis/my-claude-skills",
+      "sourceType": "github",
+      "skillPath": "claude-doctor/SKILL.md",
+      "computedHash": "480c6e5ddd2279b960e92f55650aa757a89dc2ed8797179d52cac5f192d00435"
+    },
     "dispatching-parallel-agents": {
       "source": "spiosifidis/my-claude-skills",
       "sourceType": "github",

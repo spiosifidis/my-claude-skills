@@ -95,6 +95,7 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | Skill | When to use |
 |---|---|
 | skill-creator | Build new custom skills |
+| claude-doctor | Health-check a machine's Claude setup — skills, sync, permissions, missing CLIs. Runs weekly via bootstrap (Mon 09:30 + shell catch-up); run manually with `bash ~/.claude/skills/claude-doctor/scripts/doctor.sh` |
 
 ### Multi-Agent Delegation
 | Skill | When to use |
