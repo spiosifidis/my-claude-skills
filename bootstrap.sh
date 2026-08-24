@@ -116,6 +116,16 @@ UPDEOF
 chmod +x "${UPDATER}"
 echo "==> Wrote updater to ${UPDATER}"
 
+# Weekly health check ("doctor"): verifies skills are installed and synced,
+# catches the failure modes that have actually happened (broken skill
+# symlinks, root-owned ~/.agents, stale sync, local-only skills not backed
+# up), and raises a macOS notification only when something is wrong. The
+# script itself ships as the claude-doctor skill so the sync keeps it
+# current; runs 30 min after the updater so it checks the freshly-synced
+# state. Run manually any time:
+#   bash ~/.claude/skills/claude-doctor/scripts/doctor.sh
+DOCTOR="${HOME}/.claude/skills/claude-doctor/scripts/doctor.sh"
+
 if command -v crontab >/dev/null 2>&1; then
   CRON_TAG="# my-claude-skills-auto-update"
   if ! crontab -l 2>/dev/null | grep -qF "${CRON_TAG}"; then
@@ -123,6 +133,13 @@ if command -v crontab >/dev/null 2>&1; then
     echo "==> Added weekly auto-update cron (Mondays 09:00)"
   else
     echo "==> Weekly auto-update cron already present"
+  fi
+  DOCTOR_TAG="# my-claude-skills-doctor"
+  if ! crontab -l 2>/dev/null | grep -qF "${DOCTOR_TAG}"; then
+    (crontab -l 2>/dev/null; echo "30 9 * * 1 [ -f \"${DOCTOR}\" ] && bash \"${DOCTOR}\" --auto >/dev/null 2>&1 ${DOCTOR_TAG}") | crontab -
+    echo "==> Added weekly health-check cron (Mondays 09:30)"
+  else
+    echo "==> Weekly health-check cron already present"
   fi
 else
   echo "==> crontab not available — relying on shell-startup catch-up only"
@@ -143,6 +160,24 @@ for RC in "${HOME}/.bashrc" "${HOME}/.zshrc"; do
     echo "==> Added startup catch-up to ${RC}"
   else
     echo "==> Startup catch-up already present in ${RC}"
+  fi
+done
+
+# Same catch-up for the weekly doctor: if the Mac was off Monday morning,
+# the check runs the next time a terminal opens. Its own 7-day stamp guard
+# makes this a no-op on almost every shell start; --auto is silent except
+# for a macOS notification when problems are found.
+DOCTOR_RC_MARKER="# my-claude-skills:doctor-catchup"
+for RC in "${HOME}/.bashrc" "${HOME}/.zshrc"; do
+  if ! grep -qF "${DOCTOR_RC_MARKER}" "${RC}" 2>/dev/null; then
+    {
+      echo ""
+      echo "${DOCTOR_RC_MARKER}"
+      echo "[ -f \"\$HOME/.claude/skills/claude-doctor/scripts/doctor.sh\" ] && (bash \"\$HOME/.claude/skills/claude-doctor/scripts/doctor.sh\" --auto >/dev/null 2>&1 &)"
+    } >> "${RC}"
+    echo "==> Added health-check catch-up to ${RC}"
+  else
+    echo "==> Health-check catch-up already present in ${RC}"
   fi
 done
 
