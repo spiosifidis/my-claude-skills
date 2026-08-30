@@ -1,6 +1,6 @@
 # Zod Quick Reference Cheat Sheet
 
-> **Version**: Zod 4.x (4.1.12+)
+> **Version**: Zod 4.x (4.4.x)
 > **Note**: Some APIs shown here (z.codec, z.iso.*, error helpers) are Zod 4 only
 
 ## Installation
@@ -62,9 +62,9 @@ if (result.success) {
 
 | Validator | Code |
 |-----------|------|
-| Email | `z.string().email()` |
-| URL | `z.string().url()` |
-| UUID | `z.string().uuid()` |
+| Email | `z.email()` |
+| URL | `z.url()` |
+| UUID | `z.uuid()` |
 | Min length | `z.string().min(5)` |
 | Max length | `z.string().max(100)` |
 | Exact length | `z.string().length(10)` |
@@ -99,7 +99,7 @@ if (result.success) {
 | Array | `z.array(z.string())` |
 | Tuple | `z.tuple([z.string(), z.number()])` |
 | Object | `z.object({ name: z.string() })` |
-| Record | `z.record(z.string())` |
+| Record | `z.record(z.string(), z.number())` |
 | Map | `z.map(z.string(), z.number())` |
 | Set | `z.set(z.string())` |
 
@@ -121,6 +121,8 @@ if (result.success) {
 | Nullable | `.nullable()` |
 | Nullish | `.nullish()` |
 | Default | `.default(value)` |
+| Prefault (v4) | `.prefault(value)` (pre-parse default) |
+| Exact Optional (v4) | `z.exactOptional(z.string())` |
 | Catch | `.catch(fallback)` |
 | Readonly | `.readonly()` |
 | Brand | `.brand<"BrandName">()` |
@@ -130,22 +132,28 @@ if (result.success) {
 | Method | Code |
 |--------|------|
 | Extend | `.extend({ field: z.string() })` |
+| Safe Extend | `.safeExtend({ field: z.string() })` |
 | Pick | `.pick({ name: true })` |
 | Omit | `.omit({ age: true })` |
-| Partial | `.partial()` |
+| Partial | `.partial()` (or `.partial({ age: true })`) |
 | Required | `.required()` |
-| Deep Partial | `.deepPartial()` |
-| Merge | `.merge(otherSchema)` |
+| Catchall | `.catchall(z.number())` |
 | Keyof | `.keyof()` |
+| Merge (deprecated) | `.merge(other)` — use `.extend(other.shape)` |
+
+**Note**: `.deepPartial()` was removed in v4 — build recursive partials manually.
 
 ## Validation
 
 | Method | Code |
 |--------|------|
-| Refine | `.refine((val) => condition, message)` |
-| Super Refine | `.superRefine((data, ctx) => { ... })` |
+| Refine | `.refine((val) => condition, { error: "msg" })` |
+| Super Refine | `.superRefine((data, ctx) => { ctx.issues.push(...) })` |
+| Check (v4) | `.check(z.minLength(3), z.startsWith("a"))` |
 | Transform | `.transform((val) => newVal)` |
 | Pipe | `.pipe(otherSchema)` |
+| Preprocess | `z.preprocess(fn, schema)` |
+| Custom | `z.custom<T>(fn, { error: "msg" })` |
 
 ## Parsing
 
@@ -196,7 +204,7 @@ z.string().min(5, "Too short!");
 z.string({
   error: (issue) => {
     if (issue.code === "too_small") {
-      return { message: `Min: ${issue.minimum}` };
+      return `Min: ${issue.minimum}`;
     }
   },
 });
@@ -238,10 +246,13 @@ DateCodec.encode(new Date());               // string
 ```typescript
 const jsonSchema = z.toJSONSchema(schema, {
   target: "openapi-3.0",
-  metadata: true,
   cycles: "ref",
-  reused: "defs",
+  reused: "inline",
+  // .meta() data included by default (globalRegistry)
 });
+
+// Experimental (4.3+): JSON Schema → Zod
+const schema = z.fromJSONSchema({ type: "string" });
 ```
 
 ## Metadata
@@ -284,6 +295,29 @@ z.cuid2()          // CUID2
 z.ulid()           // ULID
 z.base64()         // Base64
 z.hex()            // Hexadecimal
+z.guid()           // Permissive UUID/GUID
+z.httpUrl()        // http/https URL only
+z.e164()           // Phone (E.164)
+z.hash("sha256")   // Hash of algorithm-specific length
+z.uuidv4()         // Version-specific UUID (also z.uuidv7)
+```
+
+## Zod Mini (`zod/mini`)
+
+Functional, tree-shakable API (~1.9kb) for bundle-sensitive targets:
+
+```typescript
+import { z } from "zod/mini";
+
+// Checks attach via .check() with standalone check factories
+const Name = z.string().check(z.minLength(1), z.maxLength(100));
+const Email = z.pipe(z.string(), z.email());
+const User = z.object({ name: Name, email: Email });
+
+z.safeParse(User, { name: "a", email: "a@b.c" }); // functional parse
+// Functional wrappers live here: z.pick(schema, mask), z.omit, z.partial,
+// z.keyof, z.catchall(schema, z.string()), z.optional, z.union, ...
+// NOTE: z.pipe(schema, z.minLength(3)) crashes — bare checks go in .check(), not pipe
 ```
 
 ## Common Patterns
@@ -293,7 +327,7 @@ z.hex()            // Hexadecimal
 const EnvSchema = z.object({
   NODE_ENV: z.enum(["development", "production"]),
   PORT: z.coerce.number().default(3000),
-  DATABASE_URL: z.string().url(),
+  DATABASE_URL: z.url(),
 });
 
 const env = EnvSchema.parse(process.env);
@@ -303,7 +337,7 @@ const env = EnvSchema.parse(process.env);
 ```typescript
 const CreateUserRequest = z.object({
   username: z.string().min(3).max(20),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8),
 });
 
@@ -313,7 +347,7 @@ const result = CreateUserRequest.safeParse(req.body);
 ### Form Validation
 ```typescript
 const FormSchema = z.object({
-  email: z.string().email("Invalid email"),
+  email: z.email({ error: "Invalid email" }),
   password: z.string().min(8, "Too short"),
 });
 ```

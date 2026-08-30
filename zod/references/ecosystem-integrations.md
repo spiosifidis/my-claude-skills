@@ -2,7 +2,7 @@
 
 Complete guide for integrating Zod with popular frameworks, libraries, and tools.
 
-**Last Updated**: 2025-11-17
+**Last Updated**: 2026-08-20 (verified against zod@4.4.3)
 
 ---
 
@@ -96,7 +96,7 @@ export const appRouter = t.router({
 
   createUser: t.procedure
     .input(z.object({
-      email: z.string().email(),
+      email: z.email(),
       name: z.string(),
     }))
     .mutation(async ({ input }) => {
@@ -133,7 +133,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const FormSchema = z.object({
-  email: z.string().email("Invalid email"),
+  email: z.email({ error: "Invalid email" }),
   password: z.string().min(8, "Password too short"),
   age: z.number().int().min(18, "Must be 18+"),
 });
@@ -201,8 +201,8 @@ model User {
 ```typescript
 // src/zod/user.ts (auto-generated)
 export const UserSchema = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
+  id: z.uuid(),
+  email: z.email(),
   name: z.string(),
   createdAt: z.date(),
 });
@@ -241,7 +241,7 @@ import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
 const CreateUserSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
   name: z.string().min(1),
   age: z.number().int().positive().optional(),
 });
@@ -367,7 +367,7 @@ import { z } from 'zod';
 
 describe('UserSchema', () => {
   const UserSchema = z.object({
-    email: z.string().email(),
+    email: z.email(),
     age: z.number().int().positive(),
   });
 
@@ -446,7 +446,7 @@ import { z } from 'zod';
 const app = new Hono();
 
 const CreateUserSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
   name: z.string(),
 });
 

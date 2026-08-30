@@ -44,9 +44,7 @@ Policy for authenticated role:
 create policy orders_user_policy on orders
   for all
   to authenticated
-  using (user_id = (select auth.uid()));
+  using (user_id = auth.uid());
 ```
-
-Note: wrapping `auth.uid()` in `(select ...)` matters for performance — Postgres caches the result per statement instead of calling it per row (see security-rls-performance.md).
 
 Reference: [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)
