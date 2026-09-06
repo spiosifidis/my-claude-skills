@@ -35,31 +35,31 @@
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman/SKILL.md",
-      "computedHash": "1a41e7f3543c4a969c040c34a96925f8a3f82a6179a3f1002692b37957f7140b"
+      "computedHash": "c4d7354b4b063d54601fcdd5097a5b1713d1a1a2e386ac39efa438aa1ffef8ce"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-commit/SKILL.md",
-      "computedHash": "b416cf134b0f33ddadeca7977aebdbb2d3db79a166d0fce2e1aabeec98132766"
+      "computedHash": "c788a282fc75b981b421dfdad5d84ea7f83f946c126daa39cfc7d3f97845e193"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "computedHash": "1b22b22d8621e5b1148dc785f8b7682bfba67a5d8e076cecd3fb0df5d9cd8910"
+      "computedHash": "377b0b8682d9db1a832c20ee6732ed0f19f55e4f7048955296128244c869c916"
     },
     "caveman-help": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-help/SKILL.md",
-      "computedHash": "845394fef650bb63b44e2e28391de704505f881c6f968ebfdfb0278343ecbd7c"
+      "computedHash": "e704f9504ebe9da3b527d5df3ca5a940efc34a18c61854102da5fe69e8f24b98"
     },
     "caveman-review": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-review/SKILL.md",
-      "computedHash": "36a4007c5c0c6b90b5accfee1cd769a86e4963b651dece2ce5f17a223a0abb4b"
+      "computedHash": "599330563f19b5c59c3efddffcd7e8d9098b74c29817ab422ccd3253b103fcb8"
     },
     "changelog-generator": {
       "source": "spiosifidis/my-claude-skills",
@@ -107,13 +107,13 @@
       "source": "anthropics/claude-code",
       "sourceType": "github",
       "skillPath": "plugins/frontend-design/skills/frontend-design/SKILL.md",
-      "computedHash": "3e0be122a3db8206b6d0d6b07cca898b5c75fb9b7b2101abe143fb2851734d2e"
+      "computedHash": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
     },
     "github-workflow": {
       "source": "hairyf/skills",
       "sourceType": "github",
       "skillPath": "skills/github-workflow/SKILL.md",
-      "computedHash": "76a48fc7229ceaa93212e0fcaca65dcdcda4e93ec3e25baf1045d808972a327e"
+      "computedHash": "1457059463af96bfc53d4fc2e5ca29bf58e722e8da0871e65dcf7a48f69ff026"
     },
     "goal-analyzer": {
       "source": "spiosifidis/my-claude-skills",
@@ -131,7 +131,7 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "4e5b5d654729e1576b1a9ba51781b70aada94b0b270e53aec94b4881b49036d0"
+      "computedHash": "20b5c4d3c0f447f618a3317deb3283191d246ffb5597d72eb8f2bb41a62fc15e"
     },
     "invoice-organizer": {
       "source": "spiosifidis/my-claude-skills",
@@ -155,7 +155,7 @@
       "source": "hairyf/skills",
       "sourceType": "github",
       "skillPath": "skills/motion/SKILL.md",
-      "computedHash": "f9570a39ae54cba08f40345f68007a66130904224ab45656582c1719dfcad0b9"
+      "computedHash": "835c244eaafb2ac65af8543cd0fa28a7c7b7c1acf00a8313a12ede8af4cb159f"
     },
     "next-dev-loop": {
       "source": "spiosifidis/my-claude-skills",
@@ -167,7 +167,7 @@
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/nextjs/skills/nextjs/SKILL.md",
-      "computedHash": "e5560c4777dfd311cd3158a6ceb24524e20cecdd2b16955dde9a349a37995847"
+      "computedHash": "e0db668b212ba2140565552bb5396a0f94e324f4685fc205c5d06152a8e3dc1e"
     },
     "playwright-cli": {
       "source": "spiosifidis/my-claude-skills",
@@ -185,7 +185,7 @@
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/react-hook-form-zod/skills/react-hook-form-zod/SKILL.md",
-      "computedHash": "c60899bb67bc006b517d4cc66329905d31c06b980015502543a742b73176d5d2"
+      "computedHash": "8c7757aca77e67d26c5c50568e467ef4138a508140528ad179e33a74c8553484"
     },
     "receiving-code-review": {
       "source": "spiosifidis/my-claude-skills",
@@ -215,19 +215,19 @@
       "source": "Redclawww/savethetokens",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "763ab91f827540d03850dafd76a7ca1dd926cc9305d2fad78220b4ba5695ec4c"
+      "computedHash": "51bf6487d5866d680dc13b7af162629a1777f67e389329af94c65c5f15ce7125"
     },
     "sequential-thinking": {
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/sequential-thinking/skills/sequential-thinking/SKILL.md",
-      "computedHash": "9420fa44a3df9476884a8c493d3d7234da54e951d5229bd5f0d64eec04c12570"
+      "computedHash": "ed565360c7c2fd6b9a4c706078f7b528e95c130808f633ac0e534fe606728af5"
     },
     "shannon": {
       "source": "unicodeveloper/shannon",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "5dbcc124e13135a2d8feabdb0149c130f46440a0685c24ab17bf01fb6ab60770"
+      "computedHash": "a6697411ece4379562384701158ffb53a75c9774e6bafc7daed069b80e8fa277"
     },
     "subagent-driven-development": {
       "source": "spiosifidis/my-claude-skills",
@@ -239,25 +239,25 @@
       "source": "supabase/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/supabase/SKILL.md",
-      "computedHash": "583344c20e90f3654dbb0632f088d89fd9f1dde8ac85e8a644dd12eee59b1380"
+      "computedHash": "16817870f69bb9db58343cfa41c6fb864713c01f3680a64e0fb869605a5d81c3"
     },
     "supabase-postgres-best-practices": {
       "source": "supabase/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
-      "computedHash": "e14e276241805c97dbcfe40dcbea1a3035269cc7293cac4b1832dda41a835e60"
+      "computedHash": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855"
     },
     "systematic-debugging": {
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/systematic-debugging/skills/systematic-debugging/SKILL.md",
-      "computedHash": "76537363ccdf379a5adf78b39bc7760103ebcc367d23682884efd3e62752eda3"
+      "computedHash": "5b911a04c63216ff14b27b6515f6d16ef01ecd5d6a95019de51cea172c15abd0"
     },
     "tailwind-v4-shadcn": {
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/tailwind-v4-shadcn/skills/tailwind-v4-shadcn/SKILL.md",
-      "computedHash": "f671120a57119a94f8a6447a760629878b8ead36750297697006136dbaac4355"
+      "computedHash": "39d77c20c339537e45f907c2079986eecf86c8e1301b6979980d4dbd7c41daf0"
     },
     "test-driven-development": {
       "source": "spiosifidis/my-claude-skills",
@@ -293,7 +293,7 @@
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
+      "computedHash": "f4647ca866a3accf763777f83e7682954f0187cd6bea7eea0399796652414e8f"
     },
     "web-quality-accessibility": {
       "source": "spiosifidis/my-claude-skills",
@@ -365,7 +365,7 @@
       "source": "secondsky/claude-skills",
       "sourceType": "github",
       "skillPath": "plugins/zod/skills/zod/SKILL.md",
-      "computedHash": "19b2fd2ec767dfa0eefc5170f1ec2dbfacf37722008f22e3f5ef8c6b6181dc75"
+      "computedHash": "0e8f91608537b12e947f03a52704247dc116cbb4c1864fda018dd7ca3710b8d4"
     }
   }
 }
