@@ -35,7 +35,7 @@
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman/SKILL.md",
-      "computedHash": "c4d7354b4b063d54601fcdd5097a5b1713d1a1a2e386ac39efa438aa1ffef8ce"
+      "computedHash": "0bf09a0a9a017d004a81d4b693e5a2d830e1a28230a5885df773e1ed9c0571cc"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -53,7 +53,7 @@
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-help/SKILL.md",
-      "computedHash": "e704f9504ebe9da3b527d5df3ca5a940efc34a18c61854102da5fe69e8f24b98"
+      "computedHash": "3effbc5b8943900c7500da48f73ab9de297866705c105df1b324d4337dec3a9a"
     },
     "caveman-review": {
       "source": "juliusbrussee/caveman",
@@ -131,7 +131,7 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "a80e96114cca1a7324c3b5b72586b93687a12a2a05302563fa81e1e30987a049"
+      "computedHash": "fa0cb3ef01a25b9094266109a63c1d01d4b2d4973f75b324f5c4ad7e568d148f"
     },
     "invoice-organizer": {
       "source": "spiosifidis/my-claude-skills",
