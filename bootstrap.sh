@@ -8,6 +8,11 @@
 #
 # Idempotent: safe to re-run any time; re-running also picks up new/updated skills.
 set -euo pipefail
+# This script has died silently after the install step on two real Macs
+# with no error text at all. Under set -e that is what a failure looks
+# like unless something reports it, so name the failing line and command
+# on the way out — a silent stop is a diagnosis denied.
+trap 'echo "bootstrap: stopped at line ${LINENO}: ${BASH_COMMAND} (exit $?)" >&2' ERR
 
 REPO="spiosifidis/my-claude-skills"
 
@@ -126,18 +131,27 @@ echo "==> Wrote updater to ${UPDATER}"
 #   bash ~/.claude/skills/claude-doctor/scripts/doctor.sh
 DOCTOR="${HOME}/.claude/skills/claude-doctor/scripts/doctor.sh"
 
+# The cron step must never be fatal: the shell-startup catch-up below
+# covers every machine on its own, and macOS has been seen refusing
+# `crontab -` from a non-interactive script. Report and move on.
 if command -v crontab >/dev/null 2>&1; then
   CRON_TAG="# my-claude-skills-auto-update"
   if ! crontab -l 2>/dev/null | grep -qF "${CRON_TAG}"; then
-    (crontab -l 2>/dev/null; echo "0 9 * * 1 ${UPDATER} --force >/dev/null 2>&1 ${CRON_TAG}") | crontab -
-    echo "==> Added weekly auto-update cron (Mondays 09:00)"
+    if (crontab -l 2>/dev/null; echo "0 9 * * 1 ${UPDATER} --force >/dev/null 2>&1 ${CRON_TAG}") | crontab -; then
+      echo "==> Added weekly auto-update cron (Mondays 09:00)"
+    else
+      echo "==> warning: crontab refused the auto-update entry (exit $?) — shell-startup catch-up still covers this machine"
+    fi
   else
     echo "==> Weekly auto-update cron already present"
   fi
   DOCTOR_TAG="# my-claude-skills-doctor"
   if ! crontab -l 2>/dev/null | grep -qF "${DOCTOR_TAG}"; then
-    (crontab -l 2>/dev/null; echo "30 9 * * 1 [ -f \"${DOCTOR}\" ] && bash \"${DOCTOR}\" --auto >/dev/null 2>&1 ${DOCTOR_TAG}") | crontab -
-    echo "==> Added weekly health-check cron (Mondays 09:30)"
+    if (crontab -l 2>/dev/null; echo "30 9 * * 1 [ -f \"${DOCTOR}\" ] && bash \"${DOCTOR}\" --auto >/dev/null 2>&1 ${DOCTOR_TAG}") | crontab -; then
+      echo "==> Added weekly health-check cron (Mondays 09:30)"
+    else
+      echo "==> warning: crontab refused the health-check entry (exit $?) — shell-startup catch-up still covers this machine"
+    fi
   else
     echo "==> Weekly health-check cron already present"
   fi
