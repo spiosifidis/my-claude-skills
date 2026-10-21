@@ -138,7 +138,13 @@ if [ -e "${SKILLS_DIR}/playwright-cli" ]; then
 fi
 if [ -e "${SKILLS_DIR}/route" ]; then
   if command -v codex >/dev/null 2>&1; then
-    pass "codex CLI installed (route skill has a working backend)"
+    # Sign-in is per machine (~/.codex never syncs) — "installed" alone is
+    # not "working". Anchored match: not-logged-in prints "Not logged in".
+    if codex login status < /dev/null 2>&1 | grep -q "^Logged in"; then
+      pass "codex CLI installed and signed in (route skill ready)"
+    else
+      warn "codex CLI installed but NOT signed in on this machine — run: codex login (ChatGPT sign-in in the browser, not the API-key option), then verify: codex login status"
+    fi
   else
     warn "route skill installed but no codex CLI — run: npm install -g @openai/codex && codex login (or install the codex plugin)"
   fi

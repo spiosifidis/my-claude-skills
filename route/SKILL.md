@@ -20,7 +20,9 @@ The wrapper picks its backend automatically; you need **one** of:
 1. **The codex plugin** (preferred — richer job tracking, resumable threads): `/plugin marketplace add openai/codex-plugin-cc` then `/plugin install codex@openai-codex`, then `/codex:setup`.
 2. **The bare `codex` CLI** on PATH (`npm install -g @openai/codex`, then `codex login`). The wrapper runs `codex exec` detached with stdin closed, captures output to `~/.claude/route-jobs/<jobId>.log`, and tracks completion via a sentinel the shell appends after codex exits. `--resume` is plugin-only (the bare CLI starts fresh, and the wrapper says so out loud); `--read-only` maps to `--sandbox read-only`.
 
-Either way Codex must be authenticated. If the wrapper reports neither backend found, it prints the install commands for both — relay them, don't guess paths or retry blindly.
+Either way Codex must be authenticated, and **sign-in is per machine**: credentials live in `~/.codex` and never sync, so each Mac needs `codex login` once (sign in with the ChatGPT account in the browser window — do **not** pick the API-key option; the ChatGPT plan covers usage and OpenAI API credit is untouched). Verify with `codex login status` — it should say "Logged in using ChatGPT". If the wrapper reports neither backend found, it prints the install commands for both — relay them, don't guess paths or retry blindly.
+
+**Known failure — stale quota/auth errors after signing in:** the background `codex app-server` process can hold onto pre-login state and keep reporting quota errors even though `codex login status` says logged in. Fix: `pkill -f "codex app-server"`, then run the task again (the next call starts a fresh server).
 
 ## Procedure
 
