@@ -35,7 +35,7 @@ All commands run from this skill's directory (`scripts/route.mjs` resolves the p
    node scripts/route.mjs run --ceiling-s 600 "<self-contained prompt>"
    ```
    - Writes are enabled by default; add `--read-only` for pure investigation/diagnosis.
-   - `--model spark` maps to `gpt-5.3-codex-spark` (the fast variant); otherwise leave model unset.
+   - `--model <name>` passes any Codex model name straight through (e.g. `--model astra`, `--model sol`); `spark` is the one alias, mapping to `gpt-5.3-codex-spark`. Leave it unset to take the machine's Codex default.
    - `--effort <none|minimal|low|medium|high|xhigh>` only when the user explicitly asks.
    - `--ceiling-s` defaults to 600 (10 min). Raise it only for jobs the user expects to run long — and say so upfront.
    - Or split the phases: `launch` returns a `jobId` immediately so you can do other work, then `watch <jobId>` later.
