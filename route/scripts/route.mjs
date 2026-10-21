@@ -178,6 +178,7 @@ function execLaunch(flags, prompt) {
   if (flags["--model"]) args.push("--model", flags["--model"] === "spark" ? "gpt-5.3-codex-spark" : flags["--model"]);
   if (flags["--effort"]) args.push("-c", `model_reasoning_effort=${flags["--effort"]}`);
   if (flags["--read-only"]) args.push("--sandbox", "read-only");
+  else args.push("--sandbox", "workspace-write");
   args.push(prompt);
 
   const logFd = fs.openSync(log, "a");
