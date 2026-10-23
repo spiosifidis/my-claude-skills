@@ -209,7 +209,7 @@
       "source": "spiosifidis/my-claude-skills",
       "sourceType": "github",
       "skillPath": "route/SKILL.md",
-      "computedHash": "bc60040d005eabc788d864955c0b6c1dfd37c547d571fac01c171b78e08e1371"
+      "computedHash": "3b0d6db2cd9820ce34f4dcb817ce505d65d4a67cc7f4b8fb57a637ca36eeceb4"
     },
     "savethetokens": {
       "source": "Redclawww/savethetokens",

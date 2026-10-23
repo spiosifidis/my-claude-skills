@@ -90,16 +90,42 @@ function isExecJobId(jobId) {
   return typeof jobId === "string" && jobId.startsWith("exec-");
 }
 
+// Claude Code cloud containers have no browser for `codex login` and an
+// egress policy that blocks api.openai.com by default, so the generic
+// install advice is wrong there — say what actually unblocks it.
+function inCloudContainer() {
+  return Boolean(process.env.CCR_SESSION_PROFILE) || fs.existsSync("/root/.ccr");
+}
+
 function resolveBackend() {
   const script = findCompanionScript();
   if (script) return { kind: "companion", script };
   if (codexBinaryAvailable()) return { kind: "exec" };
+  const cloudHint = inCloudContainer()
+    ? "\n  This is a Claude Code cloud container: in the environment's settings (title-bar environment menu → Edit) add an\n" +
+      "  OPENAI_API_KEY under Network secrets, put `npm install -g @openai/codex` in the Setup script, and allow api.openai.com\n" +
+      "  in the network policy. New sessions then have a working `codex`; this one won't."
+    : "";
   fail(
     "neither the codex plugin (codex-companion.mjs) nor the `codex` CLI was found.\n" +
       "  - plugin: /plugin marketplace add openai/codex-plugin-cc, then /plugin install codex@openai-codex, then /codex:setup\n" +
-      "  - bare CLI: npm install -g @openai/codex, then `codex login`"
+      "  - bare CLI: npm install -g @openai/codex, then `codex login`" +
+      cloudHint
   );
 }
+
+// The plugin backend talks to a long-lived `codex app-server`. One started
+// before `codex login` (or left over from an old session) keeps stale auth
+// and fails every launch with quota/auth errors even though `codex login
+// status` says logged in — confirmed on a real Mac, where killing it made
+// /route work instantly. Returns true if a server was actually running.
+function restartAppServer() {
+  if (process.platform === "win32") return false;
+  const killed = spawnSync("pkill", ["-f", "codex app-server"], { encoding: "utf8", input: "", timeout: 5_000 });
+  return killed.status === 0;
+}
+
+const STALE_AUTH_RE = /quota|usage limit|rate limit|unauthori[sz]ed|not logged in|log ?in|authenticat|\b(401|403|429)\b/i;
 
 // ---------------------------------------------------------------------------
 // Companion backend (plugin)
@@ -268,8 +294,21 @@ function doLaunch(argv) {
   if (flags["--effort"]) args.push("--effort", flags["--effort"]);
   args.push(prompt);
 
-  const out = companionJson(backend.script, args);
-  if (!out.ok) fail(out.timedOut ? "launch call timed out after 60s" : out.stderr || out.stdout || "launch failed", 2);
+  let out = companionJson(backend.script, args);
+  if (!out.ok) {
+    // Exactly one retry, and only after restarting a server that was really
+    // running: a stale app-server is the one launch failure that heals itself.
+    const firstError = out.timedOut ? "launch call timed out after 60s" : out.stderr || out.stdout || "launch failed";
+    if (restartAppServer()) {
+      process.stderr.write(`route: launch failed (${firstError.split("\n")[0].slice(0, 120)}); restarted a stale codex app-server, retrying once…\n`);
+      sleepSync(1500);
+      out = companionJson(backend.script, args);
+    }
+    if (!out.ok) {
+      const err = out.timedOut ? "launch call timed out after 60s" : out.stderr || out.stdout || "launch failed";
+      fail(`${err}\n  If \`codex login status\` says you are logged in, run: pkill -f "codex app-server"  and try again.`, 2);
+    }
+  }
   const jobId = out.json?.jobId;
   if (!jobId) fail(`launch succeeded but no jobId in response: ${JSON.stringify(out.json).slice(0, 300)}`);
   process.stdout.write(`${JSON.stringify({ jobId, title: out.json.title ?? null })}\n`);
@@ -354,7 +393,11 @@ async function doWatch(argv) {
         process.exit(result.ok ? 0 : 1);
       }
       if (job.status === "failed" || job.status === "cancelled") {
-        process.stdout.write(`Job ${jobId} ${job.status}: ${job.errorMessage ?? job.summary ?? "no error message stored"}\n`);
+        const message = job.errorMessage ?? job.summary ?? "no error message stored";
+        process.stdout.write(`Job ${jobId} ${job.status}: ${message}\n`);
+        if (job.status === "failed" && STALE_AUTH_RE.test(message)) {
+          process.stdout.write(`  Looks like stale Codex auth. If \`codex login status\` says logged in, run: pkill -f "codex app-server"  and re-run the task.\n`);
+        }
         process.exit(1);
       }
     }

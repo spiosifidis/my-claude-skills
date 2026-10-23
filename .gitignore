@@ -2,6 +2,9 @@
 node_modules/
 .DS_Store
 .claude/settings.local.json
-.claude/skills/
+# .claude/skills/ is committed on purpose: relative symlinks to every skill
+# folder, so a session opened on this repo (cloud or local) has all skills as
+# project skills with no install step. Regenerate after adding/removing one:
+#   for d in */; do d="${d%/}"; [ -f "$d/SKILL.md" ] && ln -sfn "../../$d" ".claude/skills/$d"; done
 # playwright-cli writes its own session snapshots here when run from repo root
 .playwright-cli/
