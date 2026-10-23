@@ -17,6 +17,17 @@ Idempotent — re-run any time:
 curl -fsSL https://raw.githubusercontent.com/spiosifidis/my-claude-skills/main/bootstrap.sh | bash
 ```
 
+## Sessions opened on this repo need no install
+
+`.claude/skills/` holds a relative symlink to every skill folder, so Claude Code
+treats all of them as project skills whenever the working directory is this
+repo — including claude.ai/code cloud sessions, which start from a fresh
+container. After adding or removing a skill, regenerate the links:
+
+```bash
+for d in */; do d="${d%/}"; [ -f "$d/SKILL.md" ] && ln -sfn "../../$d" ".claude/skills/$d"; done
+```
+
 ## Install one skill
 
 ```bash

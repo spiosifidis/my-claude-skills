@@ -22,7 +22,9 @@ The wrapper picks its backend automatically; you need **one** of:
 
 Either way Codex must be authenticated, and **sign-in is per machine**: credentials live in `~/.codex` and never sync, so each Mac needs `codex login` once (sign in with the ChatGPT account in the browser window — do **not** pick the API-key option; the ChatGPT plan covers usage and OpenAI API credit is untouched). Verify with `codex login status` — it should say "Logged in using ChatGPT". If the wrapper reports neither backend found, it prints the install commands for both — relay them, don't guess paths or retry blindly.
 
-**Known failure — stale quota/auth errors after signing in:** the background `codex app-server` process can hold onto pre-login state and keep reporting quota errors even though `codex login status` says logged in. Fix: `pkill -f "codex app-server"`, then run the task again (the next call starts a fresh server).
+**Known failure — stale quota/auth errors after signing in:** the background `codex app-server` process can hold onto pre-login state and keep reporting quota errors even though `codex login status` says logged in. The wrapper heals this itself at launch: if the launch call fails and an app-server is running, it restarts that server and retries exactly once (you'll see `restarted a stale codex app-server, retrying once…` on stderr). If a job fails *mid-run* with auth/quota text instead, the wrapper prints the manual fix: `pkill -f "codex app-server"`, then run the task again.
+
+**Cloud sessions (claude.ai/code):** this repo ships its skills as project skills (`.claude/skills/` symlinks), so `/route` exists in any session opened on this repo — but the container has no browser for `codex login` and blocks api.openai.com by default. The wrapper detects a cloud container and prints the exact fix (an `OPENAI_API_KEY` Network secret, `npm install -g @openai/codex` in the Setup script, api.openai.com allowed in the network policy). Relay that; don't retry.
 
 ## Procedure
 
