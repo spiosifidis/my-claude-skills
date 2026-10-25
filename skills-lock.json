@@ -131,7 +131,7 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "5fb0d412928c03e62d2536adfd878ad6aad6f9ce343956aa4f7164da06da3459"
+      "computedHash": "16b387abe496342c2846c9d0f7d8e18f95aaff1d6a283eb387353353c354bfac"
     },
     "invoice-organizer": {
       "source": "spiosifidis/my-claude-skills",
