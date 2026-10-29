@@ -73,6 +73,12 @@
       "skillPath": "claude-doctor/SKILL.md",
       "computedHash": "480c6e5ddd2279b960e92f55650aa757a89dc2ed8797179d52cac5f192d00435"
     },
+    "clean-user-facing-text": {
+      "source": "guillaumemeyer/watermarks-remover",
+      "sourceType": "github",
+      "skillPath": "skills/clean-user-facing-text/SKILL.md",
+      "computedHash": "07ce27ad6e3c25b738285e7087c42364c1738f446b7dd7d2feedb174f6a5c1c3"
+    },
     "dispatching-parallel-agents": {
       "source": "spiosifidis/my-claude-skills",
       "sourceType": "github",

@@ -136,6 +136,13 @@ if [ -e "${SKILLS_DIR}/playwright-cli" ]; then
     warn "playwright-cli skill installed but the CLI is missing — run: npm install -g @playwright/cli@latest"
   fi
 fi
+if [ -e "${SKILLS_DIR}/clean-user-facing-text" ]; then
+  if command -v python3 >/dev/null 2>&1; then
+    pass "python3 available (clean-user-facing-text scripts can run)"
+  else
+    warn "clean-user-facing-text installed but python3 is missing — install Python 3 (macOS: xcode-select --install)"
+  fi
+fi
 if [ -e "${SKILLS_DIR}/route" ]; then
   if command -v codex >/dev/null 2>&1; then
     # Sign-in is per machine (~/.codex never syncs) — "installed" alone is
