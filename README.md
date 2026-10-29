@@ -95,6 +95,7 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | Skill | When to use |
 |---|---|
 | avoid-ai-writing | Remove AI-isms from written content |
+| clean-user-facing-text | Final polish for prose you own: strip invisible Unicode, measure stylometry, rewrite once while keeping facts, voice and required disclosures. Needs `python3` on the machine (stdlib only). From guillaumemeyer/watermarks-remover (MIT) |
 | invoice-organizer | Organize invoices/receipts for tax prep |
 
 ### Health / Athlisis
