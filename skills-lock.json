@@ -103,6 +103,12 @@
       "skillPath": "file-organizer/SKILL.md",
       "computedHash": "c60c09e3e3232176f7129cb424c2d2d4cc3fcadb4e136ee5662745752294d755"
     },
+    "find-docs": {
+      "source": "upstash/context7",
+      "sourceType": "github",
+      "skillPath": "skills/find-docs/SKILL.md",
+      "computedHash": "bc717bce4e8c02243fe852b20ee9990962b13a91c493ce59417278b2218127a5"
+    },
     "finishing-a-development-branch": {
       "source": "spiosifidis/my-claude-skills",
       "sourceType": "github",
@@ -235,6 +241,12 @@
       "skillPath": "SKILL.md",
       "computedHash": "a6697411ece4379562384701158ffb53a75c9774e6bafc7daed069b80e8fa277"
     },
+    "skill-scanner": {
+      "source": "getsentry/skills",
+      "sourceType": "github",
+      "skillPath": "skills/skill-scanner/SKILL.md",
+      "computedHash": "ed3ddc64c2319e92f39a0cdb708a8b661540c5596cb095a49707899956ff4bfc"
+    },
     "subagent-driven-development": {
       "source": "spiosifidis/my-claude-skills",
       "sourceType": "github",
@@ -288,6 +300,12 @@
       "sourceType": "github",
       "skillPath": "using-superpowers/SKILL.md",
       "computedHash": "75fb918d6ddbdfea9abe9d67a8d9214b1c95d9da58078c078b04fc658526c1cf"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "7991ed4fbecdac23f47c1a40c243e00a212a9e7f3604db93959b3ae11dffe299"
     },
     "verification-before-completion": {
       "source": "secondsky/claude-skills",
