@@ -108,6 +108,14 @@ When multiple skills could apply, use this order:
 "Let's build X" → brainstorming first, then implementation skills.
 "Fix this bug" → systematic-debugging first, then domain-specific skills.
 
+## Companion Skills (invoke alongside, not instead)
+
+These pair with other skills and are the easiest to skip because another skill already "covers" the topic. A stack skill loading does NOT replace them:
+
+- **`find-docs`** — any question or code that depends on a library's current API, config or CLI (Next.js, React, Tailwind, Supabase, Resend, Zod, Stripe…), *even when* `nextjs`, `supabase`, `tailwind-v4-shadcn` etc. already loaded. Stack skills don't cover every API and go stale; if the stack skill doesn't answer the exact point, look it up before answering from memory. A stack skill that itself fetches live official docs (e.g. `supabase`) counts as the lookup; don't do both.
+- **`vercel-react-best-practices`** — writing, reviewing or refactoring any React/Next.js component, page or data fetch, together with `nextjs`.
+- **`skill-scanner`** — before installing, vendoring or recommending any skill, plugin or agent-tool repo (GitHub link, `npx skills add`, copying a skill folder).
+
 ## Skill Types
 
 **Rigid** (TDD, systematic-debugging): Follow exactly. Don't adapt away discipline.
