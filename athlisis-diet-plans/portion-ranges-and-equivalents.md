@@ -6,10 +6,13 @@ Normal range is the default; the max column is a last resort, only when other fo
 
 | Τρόφιμο | Συνηθισμένο εύρος | Max (μόνο αν χρειάζεται κάλυψη θερμίδων) |
 |---|---|---|
-| Κοτόπουλο (ψητό/βραστό) | 120-160γρ | 220γρ |
+| Κοτόπουλο (ψητό/βραστό) | 120-180γρ | 220γρ |
+| Κοτόπουλο μέσα σε τορτίγια / αραβική / μπαγκέτα (ειδικά με τυρί) | 80-100γρ | 120γρ |
 | Μπιφτέκια | 120-150γρ | 170-180γρ |
 | Μοσχάρι κοκκινιστό/λεμονάτο | 90-140γρ | 160γρ |
-| Μακαρόνια βρασμένα | 190-220γρ | 250γρ |
+| Σολομός μαγειρεμένος | 160-190γρ | 200γρ |
+| Τόνος σε νερό | μόνο μεγέθη κονσέρβας: 60 / 80 / 110 / 150γρ | 150γρ |
+| Μακαρόνια βρασμένα | 190-240γρ | 250γρ |
 | Κιμάς κοκκινιστός (με μακαρόνια) | 70-100γρ | — |
 | Τσιπούρα ψητή | 200-250γρ | 280γρ |
 | Σαρδέλα ψητή | 120-140γρ | 160γρ |
@@ -17,7 +20,8 @@ Normal range is the default; the max column is a last resort, only when other fo
 | Φασολάκια | 300-350γρ | 400γρ |
 | Αρακάς | 240-280γρ | 300γρ |
 | Σπανακόρυζο | 270-300γρ | 350γρ |
-| Ρύζι/Κινόα βρασμένη | 100-160γρ | 220γρ |
+| Ρύζι/Κινόα βρασμένη | 100-180γρ | 220γρ |
+| Αβοκάντο ("½ αβοκάντο") | 80-100γρ | — |
 | Πατάτα ψητή | 130-180γρ | 250γρ |
 | Γεμιστά ορφανά ή με κιμά | 200-250γρ | 300γρ |
 | Παστίτσιο ή μουσακάς | 190-220γρ | 250γρ |
@@ -33,11 +37,14 @@ Normal range is the default; the max column is a last resort, only when other fo
 ## General coverage rules
 
 - **Σαλάτα επιλογής**: always exactly 2 cups (56 kcal), never scaled.
-- **Ελαιόλαδο**: default 1 tsp per meal; raise it (e.g. 2 tsp) when calorie coverage needs it, or when the client's questionnaire specifies an amount.
-- **Ομελέτα**: olive oil is always **at least 2 tsp**, regardless of calorie coverage — this is a fixed exception, not conditional.
-- **Rounding**: grams always round to a whole number (never e.g. 145.5γρ). Prefer round numbers (multiples of 5/10) even if it means landing a few kcal outside ±30.
+- **Ελαιόλαδο**: default 1 tsp per meal; raise it (e.g. 2 tsp) only when calories need covering and the other foods of the meal can't go any higher, or when the client's questionnaire specifies an amount. It is not raised automatically for λαδερά or όσπρια.
+- **Ομελέτα**: olive oil is always **2 tsp**, regardless of calorie coverage — fixed, not conditional (confirmed by the dietitian 2026-11-10).
+- **Αυγά**: whole numbers only; at least 2 in a Μεσημεριανό/Βραδινό meal, 1 is fine in Πρωινό or a snack.
+- **Protein vs starch**: lean toward slightly more protein and slightly less carbohydrate. To lower a meal's kcal, reduce the starch first (πίτα, παξιμάδι, φρυγανιά, ψωμί, ρύζι, μακαρόνια).
+- **Rounding**: grams always round to a whole number in steps of **5γρ**. Chicken, fish, beef, steaks, μπιφτέκια and pork go in steps of **10γρ**. Prefer round numbers even if it means landing a few kcal outside ±30, and prefer landing a little above target over a portion that's too small or awkward.
 - **Cooked, drained weight**: all quantities refer to cooked, drained food — no broth, bones, or other non-edible parts.
-- **Ψωμί**: 1 φέτα (30γρ) or 1.5 φέτες (45γρ) — both are acceptable standard servings.
+- **Ψωμί ολικής**: 1 φέτα (30γρ) or 1.5 φέτες (45γρ) — both are acceptable standard servings.
+- **Ψωμί γερμανικού τύπου** (ID `22098`): 1 φέτα = **56γρ**; count it in slices of 56γρ.
 - **Quaker νιφάδες βρώμης**: 10γρ = 1 κ.σ. (tablespoon).
 
 ## Starch/bread equivalence table
