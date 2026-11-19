@@ -74,6 +74,7 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | Skill | When to use |
 |---|---|
 | nextjs | Any Next.js work — App Router, Server Actions, caching |
+| vercel-react-best-practices | Writing or reviewing React/Next.js code for speed — 70 Vercel rules on waterfalls, bundle size, server rendering, re-renders. From vercel-labs/agent-skills (MIT) |
 | react-hook-form-zod | Building forms with validation |
 | zod | Schema validation — APIs, env vars, form data |
 | access-control-rbac | Role-based access control, multi-role systems |
@@ -90,6 +91,7 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | systematic-debugging | Any bug — always before proposing a fix |
 | verification-before-completion | Always before saying "done" or committing |
 | github-workflow | Task-to-PR workflow — branch, commit, create PR |
+| find-docs | Look up current docs for any library (Next.js, Tailwind, Supabase…) instead of trusting training data. Uses the Context7 CLI via `npx ctx7@latest`, so it needs Node; works without login, `npx ctx7@latest login` raises the monthly quota. Queries go to Context7's servers — keep secrets and private code out of them. From upstash/context7 (MIT) |
 
 ### Writing & Content
 | Skill | When to use |
@@ -107,6 +109,7 @@ npx skills add spiosifidis/my-claude-skills -s '*'
 | Skill | When to use |
 |---|---|
 | skill-creator | Build new custom skills |
+| skill-scanner | Security-scan a skill before installing it — prompt injection, malicious scripts, excessive permissions. Its script runs with `uv` (stdlib + pyyaml, no network). From getsentry/skills |
 | claude-doctor | Health-check a machine's Claude setup — skills, sync, permissions, missing CLIs. Runs weekly via bootstrap (Mon 09:30 + shell catch-up); run manually with `bash ~/.claude/skills/claude-doctor/scripts/doctor.sh` |
 
 ### Multi-Agent Delegation

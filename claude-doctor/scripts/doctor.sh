@@ -143,6 +143,20 @@ if [ -e "${SKILLS_DIR}/clean-user-facing-text" ]; then
     warn "clean-user-facing-text installed but python3 is missing — install Python 3 (macOS: xcode-select --install)"
   fi
 fi
+if [ -e "${SKILLS_DIR}/skill-scanner" ]; then
+  if command -v uv >/dev/null 2>&1; then
+    pass "uv available (skill-scanner script can run)"
+  else
+    warn "skill-scanner installed but uv is missing — run: curl -LsSf https://astral.sh/uv/install.sh | sh"
+  fi
+fi
+if [ -e "${SKILLS_DIR}/find-docs" ]; then
+  if command -v npx >/dev/null 2>&1; then
+    pass "npx available (find-docs can run the Context7 CLI)"
+  else
+    warn "find-docs installed but npx is missing — install Node.js (https://nodejs.org)"
+  fi
+fi
 if [ -e "${SKILLS_DIR}/route" ]; then
   if command -v codex >/dev/null 2>&1; then
     # Sign-in is per machine (~/.codex never syncs) — "installed" alone is
