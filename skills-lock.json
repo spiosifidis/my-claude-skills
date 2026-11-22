@@ -107,7 +107,7 @@
       "source": "upstash/context7",
       "sourceType": "github",
       "skillPath": "skills/find-docs/SKILL.md",
-      "computedHash": "bc717bce4e8c02243fe852b20ee9990962b13a91c493ce59417278b2218127a5"
+      "computedHash": "1688dcf1e2a16ed362a430415236085786a650b342f985d17caadadb6d2487d3"
     },
     "finishing-a-development-branch": {
       "source": "spiosifidis/my-claude-skills",
@@ -143,7 +143,7 @@
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
-      "computedHash": "233c81d5a07f0ed0c9d16d200057178b2e026c139c11ad1c161eadfb7ee467a8"
+      "computedHash": "dc7c49c1ad645d0ab8737e852419bba0a9db27cdceebad3630e88d5f772813be"
     },
     "invoice-organizer": {
       "source": "spiosifidis/my-claude-skills",
@@ -245,7 +245,7 @@
       "source": "getsentry/skills",
       "sourceType": "github",
       "skillPath": "skills/skill-scanner/SKILL.md",
-      "computedHash": "ed3ddc64c2319e92f39a0cdb708a8b661540c5596cb095a49707899956ff4bfc"
+      "computedHash": "b0fdcbb9cd0d11e0425815fa37bb5483b13e6dce5fe5f3aeb4529dc8f80708bd"
     },
     "subagent-driven-development": {
       "source": "spiosifidis/my-claude-skills",
@@ -305,7 +305,7 @@
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/react-best-practices/SKILL.md",
-      "computedHash": "7991ed4fbecdac23f47c1a40c243e00a212a9e7f3604db93959b3ae11dffe299"
+      "computedHash": "71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355"
     },
     "verification-before-completion": {
       "source": "secondsky/claude-skills",
@@ -317,7 +317,7 @@
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "computedHash": "f4647ca866a3accf763777f83e7682954f0187cd6bea7eea0399796652414e8f"
+      "computedHash": "360b1240acfffa95e76373db9f837a1f28aba8f6d4c361e3d588be0eaefaa070"
     },
     "web-quality-accessibility": {
       "source": "spiosifidis/my-claude-skills",
